@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://simplechile.com/schemas/execute-input.schema.json",
+  "title": "Simple EXECUTE Input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request_id",
+    "capability",
+    "scope"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "DECIDE request_id. EXECUTE must be bound to a prior discovery."
+    },
+    "capability": {
+      "type": "string",
+      "enum": [
+        "AGENCY_PROFILE",
+        "CLIENT_RELATION",
+        "CLIENT_LIST",
+        "PORTFOLIO",
+        "CREDENTIALS",
+        "CONSUMER_INSIGHTS",
+        "CONTACT_DIRECTORY"
+      ]
+    },
+    "scope": {
+      "type": "object",
+      "description": "Concrete scope built by ChatGPT from the capability contract and canonical maps returned by DECIDE."
+    },
+    "include_context": {
+      "type": "boolean",
+      "default": true,
+      "description": "Request CONTEXT when the capability has a temporal dimension. CONTEXT must preserve all non-temporal scope dimensions."
+    }
+  }
+}
