@@ -1,0 +1,379 @@
+{
+  "version": "0.1",
+  "purpose": "Closed semantic registry for classifying user questions before evidence discovery. This file does not map intents to data sources.",
+  "classification_rules": {
+    "primary_intent": "Select the intent that best represents the user's requested outcome, not merely entities mentioned in the question.",
+    "compound_questions": "A question may declare one primary_intent and secondary_intents when it explicitly requests multiple outcomes.",
+    "proof_followups": "When the user asks to substantiate a previous claim, classify as PROOF and preserve the claim/context as input.",
+    "fit_vs_why_simple": "Use FIT when relevance depends on the user's company, industry, problem or stated need. Use WHY_SIMPLE for general commercial reasons to consider Simple.",
+    "why_now": "Use WHY_NOW only when the question asks why action is timely or what opportunity/cost exists now. Do not silently answer it from historical consumer content.",
+    "unknown": "If no intent is a defensible match, use UNKNOWN rather than forcing a family."
+  },
+  "intents": {
+    "IDENTITY": {
+      "description": "Institutional identity, history, positioning and what Simple says it is.",
+      "examples": [
+        "¿Qué es Simple?",
+        "¿Hace cuánto existe Simple?",
+        "¿Cómo se define Simple?"
+      ],
+      "out_of_scope": [
+        "¿Quién dirige Simple?",
+        "¿Qué servicios ofrece?",
+        "¿Por qué debería contratar a Simple?"
+      ]
+    },
+    "TEAM": {
+      "description": "People, leadership and published roles at Simple.",
+      "examples": [
+        "¿Quién dirige Simple?",
+        "¿Quiénes son los socios?",
+        "¿Quién está a cargo de medios?"
+      ],
+      "out_of_scope": [
+        "¿Qué hace Simple?",
+        "¿Cómo contacto al área de medios?"
+      ]
+    },
+    "CAPABILITIES": {
+      "description": "Services, disciplines and capabilities Simple publicly declares.",
+      "examples": [
+        "¿Qué servicios ofrece Simple?",
+        "¿Hacen creatividad, digital y medios?",
+        "¿Hacen estrategia de marca?",
+        "¿Simple puede manejar integralmente mi marca?"
+      ],
+      "out_of_scope": [
+        "¿Por qué debería contratar a Simple?",
+        "¿Qué campañas hicieron para Colun?"
+      ]
+    },
+    "CLIENTS": {
+      "description": "Brands and organizations publicly presented as Simple clients.",
+      "examples": [
+        "¿Con qué marcas han trabajado?",
+        "¿Han trabajado con Colun?",
+        "¿Qué clientes conocidos tienen?"
+      ],
+      "out_of_scope": [
+        "¿Qué hicieron para Colun?",
+        "¿Tienen experiencia relevante para una empresa como la mía?"
+      ]
+    },
+    "PORTFOLIO": {
+      "description": "Concrete work or campaigns published by Simple, including viewable portfolio pieces.",
+      "examples": [
+        "¿Qué trabajos ha hecho Simple?",
+        "¿Qué han hecho para Abastible?",
+        "Muéstrame campañas de Simple",
+        "¿Tienen trabajos que pueda ver?"
+      ],
+      "out_of_scope": [
+        "¿Con qué marcas trabajan?",
+        "¿Por qué debería elegirlos?"
+      ]
+    },
+    "CONSUMER": {
+      "description": "Consumer observations or statistics published in Simple's Los Consumidores section.",
+      "examples": [
+        "¿Qué sabe Simple sobre los consumidores chilenos?",
+        "¿Qué dice Simple sobre compra online?",
+        "¿Qué tendencias de consumidores han publicado?"
+      ],
+      "out_of_scope": [
+        "¿Qué está pasando hoy con el consumidor chileno?",
+        "¿Por qué debería contratar a Simple ahora?"
+      ]
+    },
+    "RELEVANT_EXPERIENCE": {
+      "description": "Find experience relevant to a user-specified industry, company type or context, without yet making a broader commercial fit recommendation.",
+      "examples": [
+        "¿Tienen experiencia con empresas como la mía?",
+        "¿Qué trabajos tienen relacionados con mi industria?",
+        "¿Tienen experiencia en consumo masivo?"
+      ],
+      "out_of_scope": [
+        "¿Por qué Simple sería buena para mi empresa?",
+        "¿Qué demuestra que pueden hacer esto?"
+      ]
+    },
+    "WHY_SIMPLE": {
+      "description": "General commercial reasons, grounded in Simple's own evidence, for considering, meeting or hiring the agency.",
+      "examples": [
+        "¿Por qué debería contratar a Simple?",
+        "¿Qué gano trabajando con Simple?",
+        "¿Qué hace diferente a Simple?",
+        "Dame tres razones para reunirme con Simple",
+        "En 30 segundos, véndeme Simple"
+      ],
+      "out_of_scope": [
+        "¿Por qué Simple sería buena para mi empresa?",
+        "¿Por qué debería hacerlo ahora?",
+        "¿Qué trabajos han hecho?"
+      ]
+    },
+    "FIT": {
+      "description": "Assess how Simple's documented capabilities and experience relate to the user's stated company, situation, problem or need.",
+      "examples": [
+        "¿Por qué Simple sería buena para mi empresa?",
+        "Somos una empresa entrando a Chile. ¿Qué podría hacer Simple por nosotros?",
+        "Necesito creatividad, digital y medios. ¿Me sirve Simple?",
+        "Tengo este problema de marketing. ¿Cómo podría ayudarme Simple?"
+      ],
+      "out_of_scope": [
+        "¿Por qué debería contratar a Simple?",
+        "¿Qué servicios ofrecen?"
+      ]
+    },
+    "PROOF": {
+      "description": "Request evidence that supports a claim about Simple's experience, capability or credibility.",
+      "examples": [
+        "¿Qué demuestra que Simple puede hacer esto?",
+        "¿Qué trabajos respaldan lo que me estás diciendo?",
+        "¿Qué marcas respaldan esa experiencia?",
+        "¿Qué reconocimientos tiene Simple?"
+      ],
+      "out_of_scope": [
+        "Muéstrame campañas de Simple",
+        "¿Con qué marcas han trabajado?"
+      ]
+    },
+    "WHY_NOW": {
+      "description": "Commercial timing: why acting, changing or engaging an agency is relevant now. Requires current/timely evidence when making current-market claims.",
+      "examples": [
+        "¿Por qué debería hablar con Simple ahora?",
+        "¿Qué está cambiando para que necesite una agencia como Simple ahora?",
+        "¿Qué oportunidad podría estar perdiendo mi marca?"
+      ],
+      "out_of_scope": [
+        "¿Por qué debería contratar a Simple?",
+        "¿Qué dice Simple sobre consumidores?"
+      ],
+      "coverage_note": "Current Simple public snapshot alone may be insufficient for strong current-market answers."
+    },
+    "CONTACT": {
+      "description": "How to contact Simple or which published contact/area is appropriate.",
+      "examples": [
+        "Quiero conversar con Simple. ¿Con quién hablo?",
+        "¿Cómo contacto a Simple?",
+        "Necesito hablar con alguien de medios. ¿A quién contacto?"
+      ],
+      "out_of_scope": [
+        "¿Quién dirige Simple?",
+        "¿Por qué debería reunirme con Simple?"
+      ]
+    },
+    "UNKNOWN": {
+      "description": "Question cannot be defensibly assigned to the closed registry.",
+      "examples": [
+        "Pregunta ajena a Simple o intención no cubierta"
+      ],
+      "out_of_scope": []
+    }
+  },
+  "test_set": {
+    "count": 40,
+    "cases": [
+      {
+        "id": 1,
+        "question": "¿Qué es Simple?",
+        "expected_intent": "IDENTITY"
+      },
+      {
+        "id": 2,
+        "question": "¿Hace cuánto existe Simple?",
+        "expected_intent": "IDENTITY"
+      },
+      {
+        "id": 3,
+        "question": "¿Quiénes están detrás de Simple?",
+        "expected_intent": "TEAM"
+      },
+      {
+        "id": 4,
+        "question": "¿Quién dirige Simple?",
+        "expected_intent": "TEAM"
+      },
+      {
+        "id": 5,
+        "question": "¿Qué servicios ofrece Simple?",
+        "expected_intent": "CAPABILITIES"
+      },
+      {
+        "id": 6,
+        "question": "¿Hacen creatividad, digital y medios?",
+        "expected_intent": "CAPABILITIES"
+      },
+      {
+        "id": 7,
+        "question": "¿Simple puede manejar integralmente mi marca?",
+        "expected_intent": "CAPABILITIES"
+      },
+      {
+        "id": 8,
+        "question": "¿Hacen estrategia de marca?",
+        "expected_intent": "CAPABILITIES"
+      },
+      {
+        "id": 9,
+        "question": "¿Con qué marcas han trabajado?",
+        "expected_intent": "CLIENTS"
+      },
+      {
+        "id": 10,
+        "question": "¿Han trabajado con Colun?",
+        "expected_intent": "CLIENTS"
+      },
+      {
+        "id": 11,
+        "question": "¿Qué clientes conocidos tienen?",
+        "expected_intent": "CLIENTS"
+      },
+      {
+        "id": 12,
+        "question": "¿Tienen experiencia con empresas como la mía?",
+        "expected_intent": "RELEVANT_EXPERIENCE"
+      },
+      {
+        "id": 13,
+        "question": "¿Qué trabajos ha hecho Simple?",
+        "expected_intent": "PORTFOLIO"
+      },
+      {
+        "id": 14,
+        "question": "¿Qué han hecho para Abastible?",
+        "expected_intent": "PORTFOLIO"
+      },
+      {
+        "id": 15,
+        "question": "Muéstrame campañas de Simple",
+        "expected_intent": "PORTFOLIO"
+      },
+      {
+        "id": 16,
+        "question": "¿Tienen trabajos que pueda ver?",
+        "expected_intent": "PORTFOLIO"
+      },
+      {
+        "id": 17,
+        "question": "¿Qué trabajos tienen relacionados con mi industria?",
+        "expected_intent": "RELEVANT_EXPERIENCE"
+      },
+      {
+        "id": 18,
+        "question": "¿Qué sabe Simple sobre los consumidores chilenos?",
+        "expected_intent": "CONSUMER"
+      },
+      {
+        "id": 19,
+        "question": "¿Qué dice Simple sobre compra online?",
+        "expected_intent": "CONSUMER"
+      },
+      {
+        "id": 20,
+        "question": "¿Qué tendencias de consumidores han publicado?",
+        "expected_intent": "CONSUMER"
+      },
+      {
+        "id": 21,
+        "question": "¿Por qué debería contratar a Simple?",
+        "expected_intent": "WHY_SIMPLE"
+      },
+      {
+        "id": 22,
+        "question": "¿Qué gano trabajando con Simple?",
+        "expected_intent": "WHY_SIMPLE"
+      },
+      {
+        "id": 23,
+        "question": "¿Por qué Simple y no otra agencia?",
+        "expected_intent": "WHY_SIMPLE"
+      },
+      {
+        "id": 24,
+        "question": "¿Qué hace diferente a Simple?",
+        "expected_intent": "WHY_SIMPLE"
+      },
+      {
+        "id": 25,
+        "question": "Dame tres razones para reunirme con Simple",
+        "expected_intent": "WHY_SIMPLE"
+      },
+      {
+        "id": 26,
+        "question": "En 30 segundos, véndeme Simple",
+        "expected_intent": "WHY_SIMPLE"
+      },
+      {
+        "id": 27,
+        "question": "¿Por qué Simple sería buena para mi empresa?",
+        "expected_intent": "FIT"
+      },
+      {
+        "id": 28,
+        "question": "Somos una empresa entrando a Chile. ¿Qué podría hacer Simple por nosotros?",
+        "expected_intent": "FIT"
+      },
+      {
+        "id": 29,
+        "question": "Necesito creatividad, digital y medios. ¿Me sirve Simple?",
+        "expected_intent": "FIT"
+      },
+      {
+        "id": 30,
+        "question": "¿Tienen experiencia relevante para una marca como la mía?",
+        "expected_intent": "RELEVANT_EXPERIENCE"
+      },
+      {
+        "id": 31,
+        "question": "Tengo este problema de marketing. ¿Cómo podría ayudarme Simple?",
+        "expected_intent": "FIT"
+      },
+      {
+        "id": 32,
+        "question": "¿Qué demuestra que Simple puede hacer esto?",
+        "expected_intent": "PROOF"
+      },
+      {
+        "id": 33,
+        "question": "¿Qué trabajos respaldan lo que me estás diciendo?",
+        "expected_intent": "PROOF"
+      },
+      {
+        "id": 34,
+        "question": "¿Qué marcas respaldan esa experiencia?",
+        "expected_intent": "PROOF"
+      },
+      {
+        "id": 35,
+        "question": "¿Qué reconocimientos tiene Simple?",
+        "expected_intent": "PROOF"
+      },
+      {
+        "id": 36,
+        "question": "¿Por qué debería hablar con Simple ahora?",
+        "expected_intent": "WHY_NOW"
+      },
+      {
+        "id": 37,
+        "question": "¿Qué está cambiando para que necesite una agencia como Simple ahora?",
+        "expected_intent": "WHY_NOW"
+      },
+      {
+        "id": 38,
+        "question": "¿Qué oportunidad podría estar perdiendo mi marca?",
+        "expected_intent": "WHY_NOW"
+      },
+      {
+        "id": 39,
+        "question": "Quiero conversar con Simple. ¿Con quién hablo?",
+        "expected_intent": "CONTACT"
+      },
+      {
+        "id": 40,
+        "question": "Necesito hablar con alguien de medios. ¿A quién contacto?",
+        "expected_intent": "CONTACT"
+      }
+    ]
+  }
+}
