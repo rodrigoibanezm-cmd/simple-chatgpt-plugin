@@ -1,0 +1,233 @@
+{
+  "version": "0.1",
+  "purpose": "Canonical scope maps exposed by DECIDE. Classifications marked editorial are explicit backend-owned mappings, never inferred at runtime by the LLM.",
+  "maps": {
+    "INDUSTRY": {
+      "authority": "editorial_v0.1",
+      "caveat": "Simple's public pages do not publish an industry taxonomy. These buckets are conservative editorial classifications based on the named client/work identity and must not be presented as claims made by Simple.",
+      "entries": [
+        {
+          "id": "FOOD_BEVERAGE",
+          "label": "Alimentos y bebidas",
+          "aliases": [
+            "consumo masivo",
+            "alimentos",
+            "bebidas"
+          ],
+          "client_ids": [
+            "COLUN",
+            "TUCAPEL"
+          ]
+        },
+        {
+          "id": "ENERGY_UTILITIES",
+          "label": "Energía y servicios",
+          "aliases": [
+            "energía",
+            "gas"
+          ],
+          "client_ids": [
+            "ABASTIBLE",
+            "EMPRESAS_COPEC"
+          ]
+        },
+        {
+          "id": "APPAREL_OUTDOOR",
+          "label": "Vestuario, calzado y outdoor",
+          "aliases": [
+            "moda",
+            "ropa",
+            "calzado",
+            "outdoor",
+            "deporte"
+          ],
+          "client_ids": [
+            "FORUS",
+            "COLUMBIA",
+            "UNDER_ARMOUR",
+            "VANS",
+            "CAT",
+            "HUSH_PUPPIES",
+            "RKF",
+            "BURTON",
+            "NINE_WEST",
+            "ELEMENT",
+            "BILLABONG",
+            "JANSPORT",
+            "RVCA",
+            "PRANA",
+            "MOUNTAIN_HARDWEAR"
+          ]
+        },
+        {
+          "id": "AUTOMOTIVE",
+          "label": "Automotriz",
+          "aliases": [
+            "autos",
+            "automóviles",
+            "vehículos"
+          ],
+          "client_ids": [
+            "INCHCAPE",
+            "RENAULT",
+            "VOLVO",
+            "JAC"
+          ]
+        },
+        {
+          "id": "MEDIA_ENTERTAINMENT",
+          "label": "Medios y entretenimiento",
+          "aliases": [
+            "medios",
+            "radio",
+            "entretención",
+            "eventos"
+          ],
+          "client_ids": [
+            "PRISA",
+            "CONCIERTO",
+            "ADN",
+            "FUTURO",
+            "LOLLAPALOOZA",
+            "PUDAHUEL",
+            "RADIOACTIVA",
+            "IMAGINA",
+            "LOS_40",
+            "CORAZON",
+            "FMDOS",
+            "ROCK_POP",
+            "FANTASILANDIA"
+          ]
+        },
+        {
+          "id": "TELECOM",
+          "label": "Telecomunicaciones",
+          "aliases": [
+            "telecom",
+            "internet",
+            "televisión"
+          ],
+          "client_ids": [
+            "VTR"
+          ]
+        },
+        {
+          "id": "HEALTHCARE",
+          "label": "Salud",
+          "aliases": [
+            "salud",
+            "clínica"
+          ],
+          "client_ids": [
+            "CLINICA_ALEMANA"
+          ]
+        },
+        {
+          "id": "REAL_ESTATE",
+          "label": "Inmobiliario",
+          "aliases": [
+            "inmobiliaria",
+            "vivienda"
+          ],
+          "client_ids": [
+            "ALMAGRO"
+          ]
+        }
+      ]
+    },
+    "CONSUMER_TOPIC": {
+      "authority": "editorial_v0.1",
+      "caveat": "Topics are deterministic editorial tags derived only from the text of the published consumer statements; they do not make the historical statements current.",
+      "entries": [
+        {
+          "id": "ONLINE_SHOPPING",
+          "label": "Compra online",
+          "aliases": [
+            "ecommerce",
+            "e-commerce",
+            "compras por internet",
+            "compra por internet"
+          ],
+          "insight_ids": [
+            "CI_001",
+            "CI_005",
+            "CI_010"
+          ]
+        },
+        {
+          "id": "BRAND_RELATIONSHIP",
+          "label": "Relación con marcas",
+          "aliases": [
+            "marca",
+            "lealtad",
+            "propósito"
+          ],
+          "insight_ids": [
+            "CI_002",
+            "CI_008"
+          ]
+        },
+        {
+          "id": "HOUSEHOLD_FINANCE",
+          "label": "Finanzas del consumidor",
+          "aliases": [
+            "gasto",
+            "presupuesto"
+          ],
+          "insight_ids": [
+            "CI_003"
+          ]
+        },
+        {
+          "id": "OMNICHANNEL_DIGITAL",
+          "label": "Omnicanalidad y comportamiento digital",
+          "aliases": [
+            "omnicanal",
+            "digital",
+            "tecnología",
+            "pagos"
+          ],
+          "insight_ids": [
+            "CI_004",
+            "CI_005",
+            "CI_007",
+            "CI_012"
+          ]
+        },
+        {
+          "id": "APPAREL_CONSUMPTION",
+          "label": "Consumo de vestuario",
+          "aliases": [
+            "ropa",
+            "vestuario"
+          ],
+          "insight_ids": [
+            "CI_006"
+          ]
+        },
+        {
+          "id": "SOCIAL_CAUSES",
+          "label": "Causas sociales y donaciones",
+          "aliases": [
+            "donaciones",
+            "causas"
+          ],
+          "insight_ids": [
+            "CI_009"
+          ]
+        },
+        {
+          "id": "FOOD_LIFESTYLE",
+          "label": "Alimentación y estilo de vida",
+          "aliases": [
+            "vegetarianismo",
+            "vegetariano"
+          ],
+          "insight_ids": [
+            "CI_011"
+          ]
+        }
+      ]
+    }
+  }
+}
