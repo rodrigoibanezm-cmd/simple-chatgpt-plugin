@@ -1,5 +1,5 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "purpose": "Authoritative capability catalog returned by DECIDE. Capabilities expose deterministic operations and their scope contracts; they do not interpret natural language.",
   "capabilities": {
     "AGENCY_PROFILE": {
@@ -71,6 +71,11 @@
           "type": "canonical_id_array",
           "map": "WORK",
           "required": false
+        },
+        "industry_ids": {
+          "type": "canonical_id_array",
+          "map": "INDUSTRY",
+          "required": false
         }
       },
       "result_shape": "works"
@@ -108,6 +113,11 @@
           "type": "canonical_id_array",
           "map": "CONSUMER_INSIGHT",
           "required": false
+        },
+        "topic_ids": {
+          "type": "canonical_id_array",
+          "map": "CONSUMER_TOPIC",
+          "required": false
         }
       },
       "result_shape": "consumer_insights"
@@ -130,6 +140,6 @@
   "notes": [
     "WHY_SIMPLE and FIT are synthesis intentions: DECIDE may expose multiple compatible capabilities; ChatGPT chooses the deterministic evidence needed.",
     "No capability currently certifies current-market WHY_NOW claims. TIMING requests must not be answered as current facts from historical consumer material.",
-    "Industry relevance is not yet a certified backend dimension because current source data does not contain a canonical industry taxonomy."
+    "INDUSTRY and CONSUMER_TOPIC are explicit editorial canonical maps. They are backend-owned deterministic classifications and must not be represented as taxonomies published by Simple."
   ]
 }
