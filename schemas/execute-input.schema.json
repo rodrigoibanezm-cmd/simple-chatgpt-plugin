@@ -6,6 +6,7 @@
   "additionalProperties": false,
   "required": [
     "request_id",
+    "decision_token",
     "capability",
     "scope"
   ],
@@ -35,6 +36,11 @@
       "type": "boolean",
       "default": true,
       "description": "Request CONTEXT when the capability has a temporal dimension. CONTEXT must preserve all non-temporal scope dimensions."
+    },
+    "decision_token": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Signed authorization returned by DECIDE. EXECUTE verifies request_id and capability against it."
     }
   }
 }
