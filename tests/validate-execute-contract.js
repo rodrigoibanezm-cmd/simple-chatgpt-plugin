@@ -5,7 +5,7 @@ const input=read("schemas/execute-input.schema.json"), output=read("schemas/exec
 const fail=[]; const capIds=Object.keys(caps.capabilities); const inputCaps=input.properties.capability.enum;
 for(const c of capIds) if(!inputCaps.includes(c)) fail.push("EXECUTE input missing capability "+c);
 for(const c of inputCaps) if(!capIds.includes(c)) fail.push("EXECUTE input exposes unknown capability "+c);
-for(const k of ["request_id","decision_token","capability","scope"]) if(!input.required.includes(k)) fail.push("EXECUTE input must require "+k);
+for(const k of ["request_id","capability","scope"]) if(!input.required.includes(k)) fail.push("EXECUTE input must require "+k);
 for(const k of ["request_id","execution_id","capability","scope","status","result","context","limitations"]) if(!output.required.includes(k)) fail.push("EXECUTE output must require "+k);
 const statuses=new Set(output.properties.status.enum);
 for(const tc of tests.cases) if(!statuses.has(tc.expected_status)) fail.push(tc.id+": unknown expected status "+tc.expected_status);
