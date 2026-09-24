@@ -5,7 +5,9 @@
     "AGENCY_PROFILE": {
       "description": "Return certified institutional profile facts.",
       "intentions": [
-        "ABOUT"
+        "ABOUT",
+        "WHY_SIMPLE",
+        "FIT"
       ],
       "scope_contract": {
         "section": {
