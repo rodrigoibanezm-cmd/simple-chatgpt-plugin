@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://simplechile.com/schemas/decide-output.schema.json",
+  "title": "Simple DECIDE Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocol_version",
+    "request_id",
+    "intention",
+    "capabilities",
+    "scope_maps"
+  ],
+  "properties": {
+    "protocol_version": {
+      "type": "string"
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "intention": {
+      "type": "string",
+      "enum": [
+        "ABOUT",
+        "EXPERIENCE",
+        "CONSUMER",
+        "WHY_SIMPLE",
+        "FIT",
+        "CONTACT",
+        "UNKNOWN"
+      ]
+    },
+    "modifiers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "TIMING"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "description",
+          "scope_contract"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "scope_contract": {
+            "type": "object",
+            "description": "Machine-readable contract for the scope accepted by EXECUTE for this capability."
+          }
+        }
+      }
+    },
+    "scope_maps": {
+      "type": "object",
+      "description": "Only canonical maps explicitly requested by ChatGPT in DECIDE. Keys are map names; values are canonical entries.",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "label"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "aliases": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
