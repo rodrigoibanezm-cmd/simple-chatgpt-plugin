@@ -6,7 +6,6 @@
   "additionalProperties": false,
   "required": [
     "request_id",
-    "decision_token",
     "capability",
     "scope"
   ],
@@ -14,7 +13,7 @@
     "request_id": {
       "type": "string",
       "minLength": 1,
-      "description": "DECIDE request_id. EXECUTE must be bound to a prior discovery."
+      "description": "DECIDE request_id used for protocol traceability."
     },
     "capability": {
       "type": "string",
@@ -36,11 +35,6 @@
       "type": "boolean",
       "default": true,
       "description": "Request CONTEXT when the capability has a temporal dimension. CONTEXT must preserve all non-temporal scope dimensions."
-    },
-    "decision_token": {
-      "type": "string",
-      "minLength": 1,
-      "description": "Signed authorization returned by DECIDE. EXECUTE verifies request_id and capability against it."
     }
   }
 }
