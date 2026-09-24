@@ -1,0 +1,74 @@
+{
+  "version": "0.1",
+  "tested_against": "config/intent-registry.json v0.2 + config/capability-registry.json v0.1",
+  "results": {
+    "total": 40,
+    "pass": 29,
+    "limited": 8,
+    "gap": 3
+  },
+  "gaps": [
+    {
+      "id": "GAP_INDUSTRY_SCOPE",
+      "cases": [
+        17
+      ],
+      "finding": "PORTFOLIO has no certified INDUSTRY dimension/map. Backend cannot deterministically translate 'mi industria' into portfolio filtering.",
+      "recommendation": "Do not invent industry tags. Add an INDUSTRY map only after source-backed/manual canonical classification is approved."
+    },
+    {
+      "id": "GAP_CONSUMER_TOPIC_SCOPE",
+      "cases": [
+        19
+      ],
+      "finding": "CONSUMER_INSIGHTS can filter only by insight IDs. A semantic request such as 'compra online' has no canonical TOPIC map, so ChatGPT cannot build deterministic scope without already knowing matching records.",
+      "recommendation": "Add a source-backed/manual CONSUMER_TOPIC canonical map and tag insight records deterministically."
+    },
+    {
+      "id": "GAP_CURRENT_TIMING_EVIDENCE",
+      "cases": [
+        37,
+        38
+      ],
+      "finding": "No capability certifies current market conditions/opportunities. Historical Simple consumer statements cannot support current WHY_NOW claims.",
+      "recommendation": "Keep TIMING limitation explicit. Add a current-evidence capability only if an authoritative current source is intentionally introduced."
+    }
+  ],
+  "limited": [
+    {
+      "cases": [
+        12,
+        27,
+        28,
+        30,
+        31
+      ],
+      "reason": "FIT synthesis is possible from certified Simple evidence, but there is no canonical industry/problem taxonomy to certify relevance beyond what the evidence directly establishes."
+    },
+    {
+      "cases": [
+        23
+      ],
+      "reason": "Simple evidence supports its own attributes but not a deterministic comparison against unnamed competing agencies."
+    },
+    {
+      "cases": [
+        36
+      ],
+      "reason": "Can explain Simple's documented proposition, but 'ahora' lacks current-market evidence."
+    }
+  ],
+  "classification_changes_from_original_40": {
+    "7": "FIT (was CAPABILITIES): asks suitability for the user's brand, not merely whether a capability exists.",
+    "12": "FIT (was RELEVANT_EXPERIENCE).",
+    "17": "FIT (was RELEVANT_EXPERIENCE).",
+    "30": "FIT (was RELEVANT_EXPERIENCE).",
+    "32": "EXPERIENCE (was PROOF).",
+    "33": "EXPERIENCE (was PROOF).",
+    "34": "EXPERIENCE (was PROOF).",
+    "35": "EXPERIENCE (was PROOF).",
+    "36": "WHY_SIMPLE + TIMING (was WHY_NOW).",
+    "37": "WHY_SIMPLE + TIMING (was WHY_NOW).",
+    "38": "FIT + TIMING (was WHY_NOW)."
+  }
+}
