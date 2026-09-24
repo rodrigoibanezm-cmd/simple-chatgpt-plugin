@@ -1,0 +1,91 @@
+{
+  "source": "https://simplechile.com/web/los-consumidores",
+  "extracted_at": "2026-09-24",
+  "count": 12,
+  "facts": [
+    {
+      "id": 1,
+      "statement": "43% de los chilenos no compra por internet tanto como le gustaría porque cree que las opciones de despacho no son buenas.",
+      "source": "Estudio Chile 3D.",
+      "page": "1",
+      "source_url": "https://simplechile.com/web/los-consumidores"
+    },
+    {
+      "id": 2,
+      "statement": "El 44% de los chilenos reconoce sentir cariño por una marca (un aumento de 12 puntos con respecto 2018), y la tendencia al reemplazo bajó a 51%.",
+      "source": "Marcas con Propósito. Chile 3D.",
+      "page": "1",
+      "source_url": "https://simplechile.com/web/los-consumidores"
+    },
+    {
+      "id": 3,
+      "statement": "El 60% de los chilenos gasta más de lo que gana.",
+      "source": "Encuesta Presupuestos Familiares INE",
+      "page": "1",
+      "source_url": "https://simplechile.com/web/los-consumidores"
+    },
+    {
+      "id": 4,
+      "statement": "El cliente hoy en día es omnicanal, el consumidor espera que todas las empresas se le acerquen independiente si están en el online u offline.",
+      "source": "SCAN Inteligencia de Mercado.",
+      "page": "1",
+      "source_url": "https://simplechile.com/web/los-consumidores"
+    },
+    {
+      "id": 5,
+      "statement": "Dos tercios de los chilenos (65%) vitrinea productos y servicios online, por lo menos una vez a la semana.",
+      "source": "Estudio GfK Adimark – Mercado Libre.",
+      "page": "1",
+      "source_url": "https://simplechile.com/web/los-consumidores"
+    },
+    {
+      "id": 6,
+      "statement": "Los chilenos somos los mayores consumidores de ropa a nivel latinoamericano.",
+      "source": "América Retail.",
+      "page": "1",
+      "source_url": "https://simplechile.com/web/los-consumidores"
+    },
+    {
+      "id": 7,
+      "statement": "El consumidor chileno es el más “tecno” de la región. Además de recibir información, es el que más realiza transacciones y pagos.",
+      "source": "Estudio Índice Digital en Latinoamérica. The Fletcher School at Tufts University.",
+      "page": "2",
+      "source_url": "https://simplechile.com/web/los-consumidores/page/2"
+    },
+    {
+      "id": 8,
+      "statement": "EL 85% DE LOS CONSUMIDORES NO SOLO NO SE IDENTIFICA CON LA PUBLICIDAD Y LOS ESTEREOTIPOS, SI NO QUE LA RECHAZA.",
+      "source": "ACHAP, ASOCIACIÓN CHILENA DE AGENCIAS DE PUBLICIDAD.",
+      "page": "2",
+      "source_url": "https://simplechile.com/web/los-consumidores/page/2"
+    },
+    {
+      "id": 9,
+      "statement": "SÓLO EL 14% DE LOS CHILENOS DONA DINERO OCASIONALMENTE Y SOLAMENTE EL 7% ES SOCIO O DEDICA EL 5% DE SU TIEMPO A ALGUNA BUENA CAUSA.",
+      "source": "CHILE 3D GFK CHILE.",
+      "page": "2",
+      "source_url": "https://simplechile.com/web/los-consumidores/page/2"
+    },
+    {
+      "id": 10,
+      "statement": "EL 35% DE LOS CONSUMIDORES CHILENOS EVITA REALIZAR COMPRAS A TRAVÉS DE INTERNET POR TEMOR A SUFRIR ESTAFAS",
+      "source": "CENTRO DE EXPERIENCIAS Y SERVICIOS (CES). ESCUELA DE NEGOCIOS UNIVERSIDAD ADOLFO IBÁÑEZ.",
+      "page": "2",
+      "source_url": "https://simplechile.com/web/los-consumidores/page/2"
+    },
+    {
+      "id": 11,
+      "statement": "UN 6% DE LA POBLACIÓN CHILENA ES VEGETARIANA.",
+      "source": "ENCUESTA NACIONAL, MINISTERIO DE MEDIO AMBIENTE.",
+      "page": "2",
+      "source_url": "https://simplechile.com/web/los-consumidores/page/2"
+    },
+    {
+      "id": 12,
+      "statement": "EN CHILE DE AQUÍ AL 2020, MÁS DEL 50% DE LOS CONSUMIDORES INTERACTUARÁN CON BOTS DE SOPORTE AL CLIENTE.",
+      "source": "IDC CHILE.",
+      "page": "2",
+      "source_url": "https://simplechile.com/web/los-consumidores/page/2"
+    }
+  ]
+}
