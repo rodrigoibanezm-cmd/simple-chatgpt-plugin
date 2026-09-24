@@ -38,7 +38,9 @@
           "CLIENT",
           "WORK",
           "CONSUMER_INSIGHT",
-          "SPECIALTY"
+          "SPECIALTY",
+          "INDUSTRY",
+          "CONSUMER_TOPIC"
         ]
       },
       "uniqueItems": true,
