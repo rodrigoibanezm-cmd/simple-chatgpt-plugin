@@ -22,10 +22,30 @@
       "url": "https://simplechile.com/web/contacto",
       "file": "pages/contacto.md",
       "type": "contact"
+    },
+    {
+      "url": "https://simplechile.com/web/ideas",
+      "file": "pages/ideas.md",
+      "type": "work",
+      "status": "retrieval_pending"
+    },
+    {
+      "url": "https://simplechile.com/web/los-consumidores",
+      "file": "pages/los-consumidores.md",
+      "type": "consumer",
+      "status": "retrieval_pending"
+    },
+    {
+      "url": "https://www.linkedin.com/company/simple-chile/",
+      "file": "pages/redes-sociales.md",
+      "type": "social",
+      "status": "partial"
     }
   ],
   "discovery_notes": [
-    "Public search/index discovery recovered four core pages.",
+    "Site navigation confirms: HOME, MANIFIESTO, NOSOTROS, CLIENTES, IDEAS, CONSUMIDOR, CONTACTO and CANAL DE DENUNCIA.",
+    "IDEAS and LOS CONSUMIDORES are registered but their body content could not yet be reliably retrieved in the current environment.",
+    "The official site navigation visibly links Instagram, LinkedIn, TikTok, Facebook and X; exact current profile URLs remain to be verified except LinkedIn.",
     "Direct retrieval of the site root, robots.txt and sitemap.xml was blocked in the current retrieval environment.",
     "This snapshot must not be treated as proof that no additional internal pages exist."
   ]
