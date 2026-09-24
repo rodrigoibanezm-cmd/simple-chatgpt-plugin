@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://simplechile.com/schemas/decide-input.schema.json",
+  "title": "Simple DECIDE Input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "intention"
+  ],
+  "properties": {
+    "intention": {
+      "type": "string",
+      "enum": [
+        "ABOUT",
+        "EXPERIENCE",
+        "CONSUMER",
+        "WHY_SIMPLE",
+        "FIT",
+        "CONTACT",
+        "UNKNOWN"
+      ]
+    },
+    "modifiers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "TIMING"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "scope_maps": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "CLIENT",
+          "WORK",
+          "CONSUMER_INSIGHT",
+          "SPECIALTY"
+        ]
+      },
+      "uniqueItems": true,
+      "description": "Canonical maps ChatGPT needs to resolve scope for a later EXECUTE call."
+    }
+  }
+}
