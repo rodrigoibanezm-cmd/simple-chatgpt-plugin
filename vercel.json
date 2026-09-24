@@ -3,16 +3,10 @@
   "outputDirectory": ".",
   "functions": {
     "api/decide.js": {
-      "includeFiles": [
-        "config/**",
-        "data/simple/**"
-      ]
+      "includeFiles": "{config/**,data/simple/**}"
     },
     "api/execute.js": {
-      "includeFiles": [
-        "config/**",
-        "data/simple/**"
-      ]
+      "includeFiles": "{config/**,data/simple/**}"
     }
   }
 }
