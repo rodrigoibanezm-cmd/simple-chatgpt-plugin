@@ -112,6 +112,42 @@
           }
         }
       }
+    },
+    "continuations": {
+      "type": "array",
+      "description": "Backend-authorized semantic refinements the LLM may use to continue the conversation. The backend defines the refinement target; the LLM may phrase the user-facing question naturally.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "scope_map",
+          "purpose"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "SCOPE_REFINEMENT"
+            ]
+          },
+          "scope_map": {
+            "type": "string",
+            "enum": [
+              "CLIENT",
+              "WORK",
+              "CONSUMER_INSIGHT",
+              "SPECIALTY",
+              "INDUSTRY",
+              "CONSUMER_TOPIC"
+            ]
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
     }
   }
 }
