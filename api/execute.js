@@ -1,0 +1,1 @@
+const {execute}=require("../lib/execute/engine");module.exports=(req,res)=>{if(req.method!=="POST")return res.status(405).json({error:"METHOD_NOT_ALLOWED"});try{return res.status(200).json(execute(req.body||{}));}catch(e){return res.status(500).json({error:"EXECUTE_FAILED",message:e.message});}};
