@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://simplechile.com/schemas/execute-output.schema.json",
+  "title": "Simple EXECUTE Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocol_version",
+    "request_id",
+    "execution_id",
+    "capability",
+    "scope",
+    "status",
+    "result",
+    "context",
+    "limitations"
+  ],
+  "properties": {
+    "protocol_version": {
+      "type": "string"
+    },
+    "request_id": {
+      "type": "string"
+    },
+    "execution_id": {
+      "type": "string"
+    },
+    "capability": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "object",
+      "description": "Validated effective scope actually executed by the backend."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "OK",
+        "NO_DATA",
+        "INVALID_SCOPE",
+        "NOT_APPLICABLE",
+        "LIMITED_COVERAGE"
+      ]
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scope",
+        "records",
+        "evidence"
+      ],
+      "properties": {
+        "scope": {
+          "type": "object",
+          "description": "Exact effective scope, including time when time exists."
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Deterministic records inside RESULT scope."
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "source_id",
+              "source_type"
+            ],
+            "properties": {
+              "source_id": {
+                "type": "string"
+              },
+              "source_type": {
+                "type": "string"
+              },
+              "source_url": {
+                "type": "string"
+              },
+              "authority": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "context": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Same semantic scope as RESULT with only temporal restriction removed. Null when the capability/source has no temporal dimension.",
+      "properties": {
+        "scope": {
+          "type": "object"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
