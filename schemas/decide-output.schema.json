@@ -72,7 +72,7 @@
     },
     "scope_maps": {
       "type": "object",
-      "description": "Only canonical maps explicitly requested by ChatGPT in DECIDE. Keys are map names; values are canonical entries.",
+      "description": "Canonical maps explicitly requested by ChatGPT plus any map required by a backend-authorized continuation, so R1 is self-contained for semantic refinement.",
       "additionalProperties": {
         "type": "array",
         "items": {
@@ -120,7 +120,7 @@
     },
     "continuations": {
       "type": "array",
-      "description": "Backend-authorized semantic refinements the LLM may use to continue the conversation. The backend defines the refinement target; the LLM may phrase the user-facing question naturally.",
+      "description": "Backend-authorized semantic refinements. A continuation expresses a useful unresolved dimension; it is independent of whether its canonical map was requested. Any required map is included in scope_maps. The LLM may resolve it from the user's existing language or ask a natural follow-up when unresolved.",
       "items": {
         "type": "object",
         "additionalProperties": false,
