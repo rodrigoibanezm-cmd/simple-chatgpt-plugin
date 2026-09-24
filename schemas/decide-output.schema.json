@@ -7,6 +7,7 @@
   "required": [
     "protocol_version",
     "request_id",
+    "decision_token",
     "intention",
     "capabilities",
     "scope_maps"
@@ -153,6 +154,11 @@
           }
         }
       }
+    },
+    "decision_token": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Signed stateless authorization binding this DECIDE response to subsequent EXECUTE calls."
     }
   }
 }
