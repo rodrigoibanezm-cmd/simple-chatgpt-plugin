@@ -1,0 +1,32 @@
+{
+  "source": "https://simplechile.com/",
+  "retrieved_at": "2026-09-24",
+  "status": "initial_public_source_snapshot",
+  "pages": [
+    {
+      "url": "https://simplechile.com/web/nosotros",
+      "file": "pages/nosotros.md",
+      "type": "company"
+    },
+    {
+      "url": "https://simplechile.com/web/manifiesto",
+      "file": "pages/manifiesto.md",
+      "type": "manifesto"
+    },
+    {
+      "url": "https://simplechile.com/web/clients",
+      "file": "pages/clientes.md",
+      "type": "clients"
+    },
+    {
+      "url": "https://simplechile.com/web/contacto",
+      "file": "pages/contacto.md",
+      "type": "contact"
+    }
+  ],
+  "discovery_notes": [
+    "Public search/index discovery recovered four core pages.",
+    "Direct retrieval of the site root, robots.txt and sitemap.xml was blocked in the current retrieval environment.",
+    "This snapshot must not be treated as proof that no additional internal pages exist."
+  ]
+}
