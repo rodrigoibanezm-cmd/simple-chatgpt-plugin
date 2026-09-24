@@ -1,0 +1,111 @@
+{
+  "version": "0.1",
+  "cases": [
+    {
+      "id": "REAL01",
+      "capability": "AGENCY_PROFILE",
+      "scope": {
+        "section": "IDENTITY"
+      },
+      "expect": {
+        "status": "OK",
+        "founded": 2011
+      }
+    },
+    {
+      "id": "REAL02",
+      "capability": "CLIENT_RELATION",
+      "scope": {
+        "client_id": "COLUN"
+      },
+      "expect": {
+        "status": "OK",
+        "published_as_client": true
+      }
+    },
+    {
+      "id": "REAL03",
+      "capability": "CLIENT_LIST",
+      "scope": {
+        "client_ids": [
+          "COLUN",
+          "ABASTIBLE"
+        ]
+      },
+      "expect": {
+        "status": "OK",
+        "count": 2
+      }
+    },
+    {
+      "id": "REAL04",
+      "capability": "PORTFOLIO",
+      "scope": {
+        "client_ids": [
+          "COLUN"
+        ]
+      },
+      "expect": {
+        "status": "OK",
+        "count": 3
+      }
+    },
+    {
+      "id": "REAL05",
+      "capability": "PORTFOLIO",
+      "scope": {
+        "industry_ids": [
+          "AUTOMOTIVE"
+        ]
+      },
+      "expect": {
+        "status": "OK",
+        "count": 2,
+        "client_id": "JAC"
+      }
+    },
+    {
+      "id": "REAL06",
+      "capability": "PORTFOLIO",
+      "scope": {
+        "client_ids": [
+          "RENAULT"
+        ]
+      },
+      "expect": {
+        "status": "NO_DATA",
+        "count": 0
+      }
+    },
+    {
+      "id": "REAL07",
+      "capability": "PORTFOLIO",
+      "scope": {
+        "client_ids": [
+          "NOT_REAL"
+        ]
+      },
+      "expect": {
+        "status": "INVALID_SCOPE"
+      }
+    },
+    {
+      "id": "REAL08",
+      "capability": "PORTFOLIO",
+      "scope": {
+        "foo": "bar"
+      },
+      "expect": {
+        "status": "INVALID_SCOPE"
+      }
+    },
+    {
+      "id": "REAL09",
+      "capability": "CREDENTIALS",
+      "scope": {},
+      "expect": {
+        "status": "NOT_APPLICABLE"
+      }
+    }
+  ]
+}
