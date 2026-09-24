@@ -49,7 +49,8 @@
         "required": [
           "id",
           "description",
-          "scope_contract"
+          "input_contract",
+          "output_contract"
         ],
         "properties": {
           "id": {
@@ -58,9 +59,13 @@
           "description": {
             "type": "string"
           },
-          "scope_contract": {
+          "input_contract": {
             "type": "object",
             "description": "Machine-readable contract for the scope accepted by EXECUTE for this capability."
+          },
+          "output_contract": {
+            "type": "object",
+            "description": "Machine-readable contract describing the R2 shape returned by EXECUTE for this capability."
           }
         }
       }
