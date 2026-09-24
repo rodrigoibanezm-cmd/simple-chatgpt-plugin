@@ -7,6 +7,15 @@
     },
     "api/execute.js": {
       "includeFiles": "{config/**,data/simple/**}"
+    },
+    "api/mcp.js": {
+      "includeFiles": "{config/**,data/simple/**}"
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/mcp",
+      "destination": "/api/mcp"
+    }
+  ]
 }
