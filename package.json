@@ -1,0 +1,8 @@
+{
+  "name": "simple-chatgpt-plugin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "test": "node tests/validate-decide-contract.js && node tests/validate-scope-maps.js && node tests/validate-execute-contract.js && node tests/validate-execute-real.js"
+  }
+}
