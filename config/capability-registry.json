@@ -1,6 +1,6 @@
 {
-  "version": "0.2",
-  "purpose": "Authoritative capability catalog returned by DECIDE. Capabilities expose deterministic operations and their scope contracts; they do not interpret natural language.",
+  "version": "0.3",
+  "purpose": "Authoritative capability catalog returned by DECIDE. Each capability publishes both the deterministic EXECUTE input contract and the R2 output contract.",
   "capabilities": {
     "AGENCY_PROFILE": {
       "description": "Return certified institutional profile facts.",
@@ -9,7 +9,7 @@
         "WHY_SIMPLE",
         "FIT"
       ],
-      "scope_contract": {
+      "input_contract": {
         "section": {
           "type": "enum",
           "values": [
@@ -22,7 +22,28 @@
           "required": false
         }
       },
-      "result_shape": "profile_facts"
+      "output_contract": {
+        "status": [
+          "OK",
+          "NO_DATA",
+          "INVALID_SCOPE",
+          "NOT_APPLICABLE",
+          "LIMITED_COVERAGE"
+        ],
+        "result": {
+          "scope": "validated input scope",
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "Profile facts; when no section is requested records are grouped by section."
+            }
+          },
+          "evidence": "source provenance records"
+        },
+        "context": "object | null",
+        "limitations": []
+      }
     },
     "CLIENT_RELATION": {
       "description": "Return whether a canonical client is present in Simple's published client evidence.",
@@ -31,14 +52,39 @@
         "FIT",
         "WHY_SIMPLE"
       ],
-      "scope_contract": {
+      "input_contract": {
         "client_id": {
           "type": "canonical_id",
           "map": "CLIENT",
           "required": true
         }
       },
-      "result_shape": "client_relation"
+      "output_contract": {
+        "status": [
+          "OK",
+          "NO_DATA",
+          "INVALID_SCOPE",
+          "NOT_APPLICABLE",
+          "LIMITED_COVERAGE"
+        ],
+        "result": {
+          "scope": "validated input scope",
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "fields": {
+                "client_id": "string",
+                "label": "string",
+                "published_as_client": "boolean"
+              }
+            }
+          },
+          "evidence": "source provenance records"
+        },
+        "context": "object | null",
+        "limitations": []
+      }
     },
     "CLIENT_LIST": {
       "description": "Return published clients, optionally bounded by canonical client selection.",
@@ -47,14 +93,38 @@
         "WHY_SIMPLE",
         "FIT"
       ],
-      "scope_contract": {
+      "input_contract": {
         "client_ids": {
           "type": "canonical_id_array",
           "map": "CLIENT",
           "required": false
         }
       },
-      "result_shape": "clients"
+      "output_contract": {
+        "status": [
+          "OK",
+          "NO_DATA",
+          "INVALID_SCOPE",
+          "NOT_APPLICABLE",
+          "LIMITED_COVERAGE"
+        ],
+        "result": {
+          "scope": "validated input scope",
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "fields": {
+                "client_id": "string",
+                "label": "string"
+              }
+            }
+          },
+          "evidence": "source provenance records"
+        },
+        "context": "object | null",
+        "limitations": []
+      }
     },
     "PORTFOLIO": {
       "description": "Return concrete published Simple work, optionally bounded by client.",
@@ -63,7 +133,7 @@
         "WHY_SIMPLE",
         "FIT"
       ],
-      "scope_contract": {
+      "input_contract": {
         "client_ids": {
           "type": "canonical_id_array",
           "map": "CLIENT",
@@ -80,7 +150,35 @@
           "required": false
         }
       },
-      "result_shape": "works"
+      "output_contract": {
+        "status": [
+          "OK",
+          "NO_DATA",
+          "INVALID_SCOPE",
+          "NOT_APPLICABLE",
+          "LIMITED_COVERAGE"
+        ],
+        "result": {
+          "scope": "validated input scope",
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "fields": {
+                "work_id": "string",
+                "client_id": "string",
+                "client": "string",
+                "title": "string",
+                "youtube_url": "string",
+                "source_url": "string"
+              }
+            }
+          },
+          "evidence": "source provenance records"
+        },
+        "context": "object | null",
+        "limitations": []
+      }
     },
     "CREDENTIALS": {
       "description": "Return published awards, recognitions and associations.",
@@ -90,7 +188,7 @@
         "WHY_SIMPLE",
         "FIT"
       ],
-      "scope_contract": {
+      "input_contract": {
         "credential_type": {
           "type": "enum",
           "values": [
@@ -102,7 +200,31 @@
           "required": false
         }
       },
-      "result_shape": "credentials"
+      "output_contract": {
+        "status": [
+          "OK",
+          "NO_DATA",
+          "INVALID_SCOPE",
+          "NOT_APPLICABLE",
+          "LIMITED_COVERAGE"
+        ],
+        "result": {
+          "scope": "validated input scope",
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "fields": {
+                "credential_type": "AWARD | RECOGNITION | ASSOCIATION",
+                "name": "string"
+              }
+            }
+          },
+          "evidence": "source provenance records"
+        },
+        "context": "object | null",
+        "limitations": []
+      }
     },
     "CONSUMER_INSIGHTS": {
       "description": "Return historical consumer statements published by Simple. Results must preserve source attribution and historical-status warning.",
@@ -110,7 +232,7 @@
         "CONSUMER",
         "FIT"
       ],
-      "scope_contract": {
+      "input_contract": {
         "insight_ids": {
           "type": "canonical_id_array",
           "map": "CONSUMER_INSIGHT",
@@ -122,21 +244,79 @@
           "required": false
         }
       },
-      "result_shape": "consumer_insights"
+      "output_contract": {
+        "status": [
+          "OK",
+          "NO_DATA",
+          "INVALID_SCOPE",
+          "NOT_APPLICABLE",
+          "LIMITED_COVERAGE"
+        ],
+        "result": {
+          "scope": "validated input scope",
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "fields": {
+                "insight_id": "string",
+                "statement": "string",
+                "attributed_source": "string",
+                "page": "string",
+                "source_url": "string",
+                "historical": "boolean"
+              }
+            }
+          },
+          "limitations": [
+            "HISTORICAL_SOURCE"
+          ],
+          "evidence": "source provenance records"
+        },
+        "context": "object | null",
+        "limitations": [
+          "HISTORICAL_SOURCE"
+        ]
+      }
     },
     "CONTACT_DIRECTORY": {
       "description": "Return published Simple contact routes, optionally by specialty.",
       "intentions": [
         "CONTACT"
       ],
-      "scope_contract": {
+      "input_contract": {
         "specialty_id": {
           "type": "canonical_id",
           "map": "SPECIALTY",
           "required": false
         }
       },
-      "result_shape": "contacts"
+      "output_contract": {
+        "status": [
+          "OK",
+          "NO_DATA",
+          "INVALID_SCOPE",
+          "NOT_APPLICABLE",
+          "LIMITED_COVERAGE"
+        ],
+        "result": {
+          "scope": "validated input scope",
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "fields": {
+                "specialty_id": "string",
+                "specialty": "string",
+                "email": "string"
+              }
+            }
+          },
+          "evidence": "source provenance records"
+        },
+        "context": "object | null",
+        "limitations": []
+      }
     }
   },
   "notes": [
