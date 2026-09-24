@@ -1,29 +1,13 @@
 {
-  "version": "0.1",
-  "tested_against": "config/intent-registry.json v0.2 + config/capability-registry.json v0.1",
+  "version": "0.2",
+  "tested_against": "config/intent-registry.json v0.2 + config/capability-registry.json v0.2 + config/scope-maps.json v0.1",
   "results": {
     "total": 40,
-    "pass": 29,
-    "limited": 8,
-    "gap": 3
+    "pass": 31,
+    "limited": 7,
+    "gap": 2
   },
   "gaps": [
-    {
-      "id": "GAP_INDUSTRY_SCOPE",
-      "cases": [
-        17
-      ],
-      "finding": "PORTFOLIO has no certified INDUSTRY dimension/map. Backend cannot deterministically translate 'mi industria' into portfolio filtering.",
-      "recommendation": "Do not invent industry tags. Add an INDUSTRY map only after source-backed/manual canonical classification is approved."
-    },
-    {
-      "id": "GAP_CONSUMER_TOPIC_SCOPE",
-      "cases": [
-        19
-      ],
-      "finding": "CONSUMER_INSIGHTS can filter only by insight IDs. A semantic request such as 'compra online' has no canonical TOPIC map, so ChatGPT cannot build deterministic scope without already knowing matching records.",
-      "recommendation": "Add a source-backed/manual CONSUMER_TOPIC canonical map and tag insight records deterministically."
-    },
     {
       "id": "GAP_CURRENT_TIMING_EVIDENCE",
       "cases": [
@@ -43,7 +27,7 @@
         30,
         31
       ],
-      "reason": "FIT synthesis is possible from certified Simple evidence, but there is no canonical industry/problem taxonomy to certify relevance beyond what the evidence directly establishes."
+      "reason": "FIT synthesis remains limited when the user's company/industry is not stated or cannot be resolved to the new INDUSTRY map; the backend does not infer unstated user context."
     },
     {
       "cases": [
@@ -70,5 +54,21 @@
     "36": "WHY_SIMPLE + TIMING (was WHY_NOW).",
     "37": "WHY_SIMPLE + TIMING (was WHY_NOW).",
     "38": "FIT + TIMING (was WHY_NOW)."
-  }
+  },
+  "resolved_gaps": [
+    {
+      "id": "GAP_INDUSTRY_SCOPE",
+      "cases": [
+        17
+      ],
+      "resolution": "Added canonical INDUSTRY map and PORTFOLIO.industry_ids scope. Classification is explicitly editorial/backend-owned, not a claim published by Simple."
+    },
+    {
+      "id": "GAP_CONSUMER_TOPIC_SCOPE",
+      "cases": [
+        19
+      ],
+      "resolution": "Added canonical CONSUMER_TOPIC map and CONSUMER_INSIGHTS.topic_ids scope. Topics deterministically reference published insight IDs."
+    }
+  ]
 }
