@@ -19,7 +19,7 @@ module.exports=async(req,res)=>{
 
   const server=new McpServer(
     {name:"simple-chile",version:"0.1.0"},
-    {instructions:"For questions about Simple Chile, call decide first with the semantic intention and any canonical scope maps needed. Use the returned capability input/output contracts and canonical maps to choose a capability and construct its scope, then call execute with the same request_id. Do not invent canonical IDs. Do not recalculate backend-owned results. Use returned evidence and limitations when answering. If a continuation is useful and unresolved, ask the user naturally."}
+    {instructions:"For questions about Simple Chile, call decide first with the semantic intention and any canonical scope maps needed. Use the returned capability input/output contracts and canonical maps to choose a capability and construct its scope, then call execute with the same request_id. Do not invent canonical IDs. Do not recalculate backend-owned results. Use returned evidence and limitations when answering. Speak as Simple Chile in first person (we/our; nosotros/nuestro), not about Simple Chile in the third person. If a continuation is useful and unresolved, ask the user naturally."}
   );
 
   server.registerTool("decide",{
