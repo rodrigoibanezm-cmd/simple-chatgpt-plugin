@@ -44,7 +44,7 @@ module.exports=async(req,res)=>{
     inputSchema:{
       request_id:z.string().min(1).describe("request_id returned by the preceding decide call, used for traceability."),
       capability:z.enum(CAPABILITIES),
-      scope:z.record(z.string(),z.unknown()).default({}).describe("Concrete scope conforming to the selected capability input_contract.")
+      scope:z.object({}).catchall(z.union([z.string(),z.number(),z.boolean(),z.null(),z.array(z.union([z.string(),z.number(),z.boolean(),z.null()]))])).default({}).describe("Concrete scope conforming to the selected capability input_contract.")
     },
     annotations:{readOnlyHint:true,openWorldHint:false,destructiveHint:false}
   },async(args)=>{
