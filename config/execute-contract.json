@@ -1,0 +1,46 @@
+{
+  "version": "0.1",
+  "principles": {
+    "binding": "EXECUTE must reference a valid prior DECIDE request_id. Capability must have been offered by that DECIDE response.",
+    "validation": "Backend validates capability and scope against the authoritative capability registry. Unknown fields, invalid canonical IDs, or unsupported dimensions are rejected; they are never interpreted.",
+    "result": "RESULT contains only certified evidence satisfying the complete effective scope.",
+    "context": "CONTEXT preserves every RESULT scope dimension except time. Only temporal restrictions may be relaxed. If the capability has no temporal dimension, CONTEXT is null.",
+    "computation": "Backend owns filtering, joins, counts, comparisons, aggregation and other deterministic operations represented by a capability. ChatGPT must not recompute backend-owned results.",
+    "provenance": "Returned records carry sufficient evidence/provenance for auditability.",
+    "no_data": "An empty certified result is returned as NO_DATA; backend does not broaden scope to find something similar."
+  },
+  "examples": {
+    "portfolio_colun": {
+      "input": {
+        "request_id": "req_example",
+        "capability": "PORTFOLIO",
+        "scope": {
+          "client_ids": [
+            "COLUN"
+          ]
+        },
+        "include_context": true
+      },
+      "expected_semantics": {
+        "result": "Only published portfolio records mapped to COLUN.",
+        "context": null
+      }
+    },
+    "consumer_online": {
+      "input": {
+        "request_id": "req_example",
+        "capability": "CONSUMER_INSIGHTS",
+        "scope": {
+          "topic_ids": [
+            "ONLINE_SHOPPING"
+          ]
+        },
+        "include_context": true
+      },
+      "expected_semantics": {
+        "result": "Only historical published insights mapped to ONLINE_SHOPPING, preserving attribution and historical warning.",
+        "context": null
+      }
+    }
+  }
+}
