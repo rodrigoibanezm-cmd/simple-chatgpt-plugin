@@ -1,0 +1,1 @@
+const {decide}=require("../lib/decide/engine");module.exports=(req,res)=>{if(req.method!=="POST")return res.status(405).json({error:"METHOD_NOT_ALLOWED"});try{return res.status(200).json(decide(req.body||{}));}catch(e){return res.status(500).json({error:"DECIDE_FAILED",message:e.message});}};
