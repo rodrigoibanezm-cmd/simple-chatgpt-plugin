@@ -1,0 +1,640 @@
+{
+  "version": "0.1",
+  "purpose": "Contract-level regression suite for the semantic intention -> DECIDE discovery -> deterministic EXECUTE path. No natural-language interpretation is performed by the backend.",
+  "summary": {
+    "total": 40,
+    "pass": 29,
+    "limited": 8,
+    "gap": 3
+  },
+  "status_definitions": {
+    "PASS": "Current protocol can construct a deterministic EXECUTE path.",
+    "LIMITED": "Path is executable, but available certified dimensions/evidence do not fully support the requested comparison or personalization.",
+    "GAP": "Current protocol cannot deterministically express the requested scope or certify the requested current claim."
+  },
+  "cases": [
+    {
+      "id": 1,
+      "question": "¿Qué es Simple?",
+      "intention": "ABOUT",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "AGENCY_PROFILE"
+        ]
+      },
+      "execute_scope": {},
+      "status": "PASS"
+    },
+    {
+      "id": 2,
+      "question": "¿Hace cuánto existe Simple?",
+      "intention": "ABOUT",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "AGENCY_PROFILE"
+        ]
+      },
+      "execute_scope": {
+        "section": "IDENTITY"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": 3,
+      "question": "¿Quiénes están detrás de Simple?",
+      "intention": "ABOUT",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "AGENCY_PROFILE"
+        ]
+      },
+      "execute_scope": {
+        "section": "TEAM"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": 4,
+      "question": "¿Quién dirige Simple?",
+      "intention": "ABOUT",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "AGENCY_PROFILE"
+        ]
+      },
+      "execute_scope": {
+        "section": "TEAM"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": 5,
+      "question": "¿Qué servicios ofrece Simple?",
+      "intention": "ABOUT",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "AGENCY_PROFILE"
+        ]
+      },
+      "execute_scope": {
+        "section": "CAPABILITIES"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": 6,
+      "question": "¿Hacen creatividad, digital y medios?",
+      "intention": "ABOUT",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "AGENCY_PROFILE"
+        ]
+      },
+      "execute_scope": {
+        "section": "CAPABILITIES"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": 7,
+      "question": "¿Simple puede manejar integralmente mi marca?",
+      "intention": "FIT",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "AGENCY_PROFILE"
+        ]
+      },
+      "execute_scope": {
+        "section": "CAPABILITIES"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": 8,
+      "question": "¿Hacen estrategia de marca?",
+      "intention": "ABOUT",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "AGENCY_PROFILE"
+        ]
+      },
+      "execute_scope": {
+        "section": "CAPABILITIES"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": 9,
+      "question": "¿Con qué marcas han trabajado?",
+      "intention": "EXPERIENCE",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "CLIENT_LIST"
+        ]
+      },
+      "execute_scope": {},
+      "status": "PASS"
+    },
+    {
+      "id": 10,
+      "question": "¿Han trabajado con Colun?",
+      "intention": "EXPERIENCE",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [
+          "CLIENT"
+        ],
+        "expected_capabilities": [
+          "CLIENT_RELATION"
+        ]
+      },
+      "execute_scope": {
+        "client_id": "COLUN"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": 11,
+      "question": "¿Qué clientes conocidos tienen?",
+      "intention": "EXPERIENCE",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "CLIENT_LIST"
+        ]
+      },
+      "execute_scope": {},
+      "status": "PASS"
+    },
+    {
+      "id": 12,
+      "question": "¿Tienen experiencia con empresas como la mía?",
+      "intention": "FIT",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "CLIENT_LIST",
+          "PORTFOLIO"
+        ]
+      },
+      "execute_scope": {},
+      "status": "LIMITED"
+    },
+    {
+      "id": 13,
+      "question": "¿Qué trabajos ha hecho Simple?",
+      "intention": "EXPERIENCE",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "PORTFOLIO"
+        ]
+      },
+      "execute_scope": {},
+      "status": "PASS"
+    },
+    {
+      "id": 14,
+      "question": "¿Qué han hecho para Abastible?",
+      "intention": "EXPERIENCE",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [
+          "CLIENT"
+        ],
+        "expected_capabilities": [
+          "PORTFOLIO"
+        ]
+      },
+      "execute_scope": {
+        "client_ids": [
+          "ABASTIBLE"
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "id": 15,
+      "question": "Muéstrame campañas de Simple",
+      "intention": "EXPERIENCE",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "PORTFOLIO"
+        ]
+      },
+      "execute_scope": {},
+      "status": "PASS"
+    },
+    {
+      "id": 16,
+      "question": "¿Tienen trabajos que pueda ver?",
+      "intention": "EXPERIENCE",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "PORTFOLIO"
+        ]
+      },
+      "execute_scope": {},
+      "status": "PASS"
+    },
+    {
+      "id": 17,
+      "question": "¿Qué trabajos tienen relacionados con mi industria?",
+      "intention": "FIT",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "PORTFOLIO"
+        ]
+      },
+      "execute_scope": {},
+      "status": "GAP"
+    },
+    {
+      "id": 18,
+      "question": "¿Qué sabe Simple sobre los consumidores chilenos?",
+      "intention": "CONSUMER",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "CONSUMER_INSIGHTS"
+        ]
+      },
+      "execute_scope": {},
+      "status": "PASS"
+    },
+    {
+      "id": 19,
+      "question": "¿Qué dice Simple sobre compra online?",
+      "intention": "CONSUMER",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [
+          "CONSUMER_INSIGHT"
+        ],
+        "expected_capabilities": [
+          "CONSUMER_INSIGHTS"
+        ]
+      },
+      "execute_scope": {},
+      "status": "GAP"
+    },
+    {
+      "id": 20,
+      "question": "¿Qué tendencias de consumidores han publicado?",
+      "intention": "CONSUMER",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "CONSUMER_INSIGHTS"
+        ]
+      },
+      "execute_scope": {},
+      "status": "PASS"
+    },
+    {
+      "id": 21,
+      "question": "¿Por qué debería contratar a Simple?",
+      "intention": "WHY_SIMPLE",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "AGENCY_PROFILE",
+          "CLIENT_LIST",
+          "PORTFOLIO",
+          "CREDENTIALS"
+        ]
+      },
+      "execute_scope": {},
+      "status": "PASS"
+    },
+    {
+      "id": 22,
+      "question": "¿Qué gano trabajando con Simple?",
+      "intention": "WHY_SIMPLE",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "AGENCY_PROFILE",
+          "PORTFOLIO",
+          "CREDENTIALS"
+        ]
+      },
+      "execute_scope": {},
+      "status": "PASS"
+    },
+    {
+      "id": 23,
+      "question": "¿Por qué Simple y no otra agencia?",
+      "intention": "WHY_SIMPLE",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "AGENCY_PROFILE",
+          "CLIENT_LIST",
+          "PORTFOLIO",
+          "CREDENTIALS"
+        ]
+      },
+      "execute_scope": {},
+      "status": "LIMITED"
+    },
+    {
+      "id": 24,
+      "question": "¿Qué hace diferente a Simple?",
+      "intention": "WHY_SIMPLE",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "AGENCY_PROFILE",
+          "CREDENTIALS"
+        ]
+      },
+      "execute_scope": {},
+      "status": "PASS"
+    },
+    {
+      "id": 25,
+      "question": "Dame tres razones para reunirme con Simple",
+      "intention": "WHY_SIMPLE",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "AGENCY_PROFILE",
+          "CLIENT_LIST",
+          "PORTFOLIO",
+          "CREDENTIALS"
+        ]
+      },
+      "execute_scope": {},
+      "status": "PASS"
+    },
+    {
+      "id": 26,
+      "question": "En 30 segundos, véndeme Simple",
+      "intention": "WHY_SIMPLE",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "AGENCY_PROFILE",
+          "CLIENT_LIST",
+          "PORTFOLIO",
+          "CREDENTIALS"
+        ]
+      },
+      "execute_scope": {},
+      "status": "PASS"
+    },
+    {
+      "id": 27,
+      "question": "¿Por qué Simple sería buena para mi empresa?",
+      "intention": "FIT",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "AGENCY_PROFILE",
+          "CLIENT_LIST",
+          "PORTFOLIO",
+          "CREDENTIALS"
+        ]
+      },
+      "execute_scope": {},
+      "status": "LIMITED"
+    },
+    {
+      "id": 28,
+      "question": "Somos una empresa entrando a Chile. ¿Qué podría hacer Simple por nosotros?",
+      "intention": "FIT",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "AGENCY_PROFILE",
+          "CLIENT_LIST",
+          "PORTFOLIO"
+        ]
+      },
+      "execute_scope": {},
+      "status": "LIMITED"
+    },
+    {
+      "id": 29,
+      "question": "Necesito creatividad, digital y medios. ¿Me sirve Simple?",
+      "intention": "FIT",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "AGENCY_PROFILE"
+        ]
+      },
+      "execute_scope": {
+        "section": "CAPABILITIES"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": 30,
+      "question": "¿Tienen experiencia relevante para una marca como la mía?",
+      "intention": "FIT",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "CLIENT_LIST",
+          "PORTFOLIO"
+        ]
+      },
+      "execute_scope": {},
+      "status": "LIMITED"
+    },
+    {
+      "id": 31,
+      "question": "Tengo este problema de marketing. ¿Cómo podría ayudarme Simple?",
+      "intention": "FIT",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "AGENCY_PROFILE",
+          "PORTFOLIO"
+        ]
+      },
+      "execute_scope": {},
+      "status": "LIMITED"
+    },
+    {
+      "id": 32,
+      "question": "¿Qué demuestra que Simple puede hacer esto?",
+      "intention": "EXPERIENCE",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "PORTFOLIO",
+          "CLIENT_LIST",
+          "CREDENTIALS"
+        ]
+      },
+      "execute_scope": {},
+      "status": "PASS"
+    },
+    {
+      "id": 33,
+      "question": "¿Qué trabajos respaldan lo que me estás diciendo?",
+      "intention": "EXPERIENCE",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "PORTFOLIO"
+        ]
+      },
+      "execute_scope": {},
+      "status": "PASS"
+    },
+    {
+      "id": 34,
+      "question": "¿Qué marcas respaldan esa experiencia?",
+      "intention": "EXPERIENCE",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "CLIENT_LIST"
+        ]
+      },
+      "execute_scope": {},
+      "status": "PASS"
+    },
+    {
+      "id": 35,
+      "question": "¿Qué reconocimientos tiene Simple?",
+      "intention": "EXPERIENCE",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "CREDENTIALS"
+        ]
+      },
+      "execute_scope": {
+        "credential_type": "RECOGNITION"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": 36,
+      "question": "¿Por qué debería hablar con Simple ahora?",
+      "intention": "WHY_SIMPLE",
+      "modifiers": [
+        "TIMING"
+      ],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "AGENCY_PROFILE",
+          "PORTFOLIO",
+          "CREDENTIALS"
+        ]
+      },
+      "execute_scope": {},
+      "status": "LIMITED"
+    },
+    {
+      "id": 37,
+      "question": "¿Qué está cambiando para que necesite una agencia como Simple ahora?",
+      "intention": "WHY_SIMPLE",
+      "modifiers": [
+        "TIMING"
+      ],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": []
+      },
+      "execute_scope": {},
+      "status": "GAP"
+    },
+    {
+      "id": 38,
+      "question": "¿Qué oportunidad podría estar perdiendo mi marca?",
+      "intention": "FIT",
+      "modifiers": [
+        "TIMING"
+      ],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": []
+      },
+      "execute_scope": {},
+      "status": "GAP"
+    },
+    {
+      "id": 39,
+      "question": "Quiero conversar con Simple. ¿Con quién hablo?",
+      "intention": "CONTACT",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [],
+        "expected_capabilities": [
+          "CONTACT_DIRECTORY"
+        ]
+      },
+      "execute_scope": {},
+      "status": "PASS"
+    },
+    {
+      "id": 40,
+      "question": "Necesito hablar con alguien de medios. ¿A quién contacto?",
+      "intention": "CONTACT",
+      "modifiers": [],
+      "decide": {
+        "requested_scope_maps": [
+          "SPECIALTY"
+        ],
+        "expected_capabilities": [
+          "CONTACT_DIRECTORY"
+        ]
+      },
+      "execute_scope": {
+        "specialty_id": "MEDIA"
+      },
+      "status": "PASS"
+    }
+  ]
+}
