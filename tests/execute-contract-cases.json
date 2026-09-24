@@ -1,0 +1,56 @@
+{
+  "version": "0.1",
+  "purpose": "Regression cases for EXECUTE contract invariants.",
+  "cases": [
+    {
+      "id": "EX01",
+      "name": "Reject capability not offered by DECIDE",
+      "expected_status": "NOT_APPLICABLE"
+    },
+    {
+      "id": "EX02",
+      "name": "Reject unknown scope field",
+      "expected_status": "INVALID_SCOPE"
+    },
+    {
+      "id": "EX03",
+      "name": "Reject unknown canonical id",
+      "expected_status": "INVALID_SCOPE"
+    },
+    {
+      "id": "EX04",
+      "name": "Do not broaden an empty valid scope",
+      "expected_status": "NO_DATA"
+    },
+    {
+      "id": "EX05",
+      "name": "RESULT respects every effective scope dimension",
+      "expected_status": "OK"
+    },
+    {
+      "id": "EX06",
+      "name": "CONTEXT may remove time only",
+      "expected_status": "OK"
+    },
+    {
+      "id": "EX07",
+      "name": "Non-temporal capability returns context null",
+      "expected_status": "OK"
+    },
+    {
+      "id": "EX08",
+      "name": "Evidence provenance is returned with result",
+      "expected_status": "OK"
+    },
+    {
+      "id": "EX09",
+      "name": "Historical consumer evidence preserves historical limitation",
+      "expected_status": "LIMITED_COVERAGE"
+    },
+    {
+      "id": "EX10",
+      "name": "Editorial INDUSTRY classification is not represented as Simple-published taxonomy",
+      "expected_status": "OK"
+    }
+  ]
+}
