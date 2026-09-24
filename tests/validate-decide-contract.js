@@ -16,6 +16,10 @@ const inputIntents = new Set(input.properties.intention.enum);
 const outputIntents = new Set(output.properties.intention.enum);
 const mapSet = new Set(input.properties.scope_maps.items.enum);
 const capSet = new Set(Object.keys(caps.capabilities));
+for (const [id,c] of Object.entries(caps.capabilities)) {
+  if (!c.input_contract || typeof c.input_contract !== "object") failures.push(`Capability ${id} missing input_contract`);
+  if (!c.output_contract || typeof c.output_contract !== "object") failures.push(`Capability ${id} missing output_contract`);
+}
 
 for (const i of intentSet) {
   if (!inputIntents.has(i)) failures.push(`Intent ${i} missing from DECIDE input schema`);
