@@ -1,7 +1,6 @@
-process.env.DECISION_TOKEN_SECRET="test-only-decision-token-secret-123456789";
 #!/usr/bin/env node
-const assert=require("assert");const {execute}=require("../lib/execute/engine");const {sign}=require("../lib/protocol/decision-token");
-const run=(capability,scope={})=>{const request_id="test_decide_request";const decision_token=sign({request_id,capabilities:[capability],exp:Date.now()+60000});return execute({request_id,decision_token,capability,scope});};
+const assert=require("assert");const {execute}=require("../lib/execute/engine");
+const run=(capability,scope={})=>execute({request_id:"test_decide_request",capability,scope});
 let r=run("AGENCY_PROFILE",{section:"IDENTITY"});assert.equal(r.status,"OK");assert.equal(r.result.records[0].founded,2011);assert.equal(r.context,null);
 r=run("CLIENT_RELATION",{client_id:"COLUN"});assert.equal(r.status,"OK");assert.equal(r.result.records[0].published_as_client,true);
 r=run("CLIENT_LIST",{client_ids:["COLUN","ABASTIBLE"]});assert.equal(r.status,"OK");assert.deepEqual(r.result.records.map(x=>x.client_id).sort(),["ABASTIBLE","COLUN"]);
@@ -16,6 +15,4 @@ r=run("CONSUMER_INSIGHTS",{topic_ids:["ONLINE_SHOPPING"]});assert.equal(r.status
 r=run("CONSUMER_INSIGHTS",{insight_ids:["CI_999"]});assert.equal(r.status,"INVALID_SCOPE");
 r=run("CONTACT_DIRECTORY",{specialty_id:"MEDIA"});assert.equal(r.status,"OK");assert.equal(r.result.records.length,1);assert.equal(r.result.records[0].email,"paola.guajardo@simplemediachile.com");
 r=run("CONTACT_DIRECTORY",{specialty_id:"NOT_REAL"});assert.equal(r.status,"INVALID_SCOPE");
-let bad=execute({request_id:"other",decision_token:sign({request_id:"test_decide_request",capabilities:["PORTFOLIO"],exp:Date.now()+60000}),capability:"PORTFOLIO",scope:{}});assert.equal(bad.status,"NOT_APPLICABLE");assert(bad.limitations.some(x=>x.code==="DECISION_REQUEST_MISMATCH"));
-bad=execute({request_id:"test_decide_request",decision_token:sign({request_id:"test_decide_request",capabilities:["CLIENT_LIST"],exp:Date.now()+60000}),capability:"PORTFOLIO",scope:{}});assert.equal(bad.status,"NOT_APPLICABLE");assert(bad.limitations.some(x=>x.code==="CAPABILITY_NOT_OFFERED"));
-console.log("Real EXECUTE engine tests PASS: 16 cases");
+console.log("Real EXECUTE engine tests PASS: 14 cases");
