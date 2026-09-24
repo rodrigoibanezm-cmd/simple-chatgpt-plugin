@@ -1,0 +1,135 @@
+{
+  "version": "0.1",
+  "purpose": "Authoritative capability catalog returned by DECIDE. Capabilities expose deterministic operations and their scope contracts; they do not interpret natural language.",
+  "capabilities": {
+    "AGENCY_PROFILE": {
+      "description": "Return certified institutional profile facts.",
+      "intentions": [
+        "ABOUT"
+      ],
+      "scope_contract": {
+        "section": {
+          "type": "enum",
+          "values": [
+            "IDENTITY",
+            "TEAM",
+            "CAPABILITIES",
+            "POSITIONING",
+            "ASSOCIATIONS"
+          ],
+          "required": false
+        }
+      },
+      "result_shape": "profile_facts"
+    },
+    "CLIENT_RELATION": {
+      "description": "Return whether a canonical client is present in Simple's published client evidence.",
+      "intentions": [
+        "EXPERIENCE",
+        "FIT",
+        "WHY_SIMPLE"
+      ],
+      "scope_contract": {
+        "client_id": {
+          "type": "canonical_id",
+          "map": "CLIENT",
+          "required": true
+        }
+      },
+      "result_shape": "client_relation"
+    },
+    "CLIENT_LIST": {
+      "description": "Return published clients, optionally bounded by canonical client selection.",
+      "intentions": [
+        "EXPERIENCE",
+        "WHY_SIMPLE",
+        "FIT"
+      ],
+      "scope_contract": {
+        "client_ids": {
+          "type": "canonical_id_array",
+          "map": "CLIENT",
+          "required": false
+        }
+      },
+      "result_shape": "clients"
+    },
+    "PORTFOLIO": {
+      "description": "Return concrete published Simple work, optionally bounded by client.",
+      "intentions": [
+        "EXPERIENCE",
+        "WHY_SIMPLE",
+        "FIT"
+      ],
+      "scope_contract": {
+        "client_ids": {
+          "type": "canonical_id_array",
+          "map": "CLIENT",
+          "required": false
+        },
+        "work_ids": {
+          "type": "canonical_id_array",
+          "map": "WORK",
+          "required": false
+        }
+      },
+      "result_shape": "works"
+    },
+    "CREDENTIALS": {
+      "description": "Return published awards, recognitions and associations.",
+      "intentions": [
+        "ABOUT",
+        "EXPERIENCE",
+        "WHY_SIMPLE",
+        "FIT"
+      ],
+      "scope_contract": {
+        "credential_type": {
+          "type": "enum",
+          "values": [
+            "AWARD",
+            "RECOGNITION",
+            "ASSOCIATION",
+            "ALL"
+          ],
+          "required": false
+        }
+      },
+      "result_shape": "credentials"
+    },
+    "CONSUMER_INSIGHTS": {
+      "description": "Return historical consumer statements published by Simple. Results must preserve source attribution and historical-status warning.",
+      "intentions": [
+        "CONSUMER",
+        "FIT"
+      ],
+      "scope_contract": {
+        "insight_ids": {
+          "type": "canonical_id_array",
+          "map": "CONSUMER_INSIGHT",
+          "required": false
+        }
+      },
+      "result_shape": "consumer_insights"
+    },
+    "CONTACT_DIRECTORY": {
+      "description": "Return published Simple contact routes, optionally by specialty.",
+      "intentions": [
+        "CONTACT"
+      ],
+      "scope_contract": {
+        "specialty_id": {
+          "type": "canonical_id",
+          "map": "SPECIALTY",
+          "required": false
+        }
+      },
+      "result_shape": "contacts"
+    }
+  },
+  "notes": [
+    "WHY_SIMPLE and FIT are synthesis intentions: DECIDE may expose multiple compatible capabilities; ChatGPT chooses the deterministic evidence needed.",
+    "No capability currently certifies current-market WHY_NOW claims. TIMING requests must not be answered as current facts from historical consumer material.",
+    "Industry relevance is not yet a certified backend dimension because current source data does not contain a canonical industry taxonomy."
+  ]
+}
