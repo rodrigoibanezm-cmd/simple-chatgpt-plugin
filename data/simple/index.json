@@ -1,7 +1,7 @@
 {
   "source": "https://simplechile.com/",
   "retrieved_at": "2026-09-24",
-  "status": "initial_public_source_snapshot",
+  "status": "public_source_snapshot_extracted",
   "pages": [
     {
       "url": "https://simplechile.com/web/nosotros",
@@ -27,13 +27,13 @@
       "url": "https://simplechile.com/web/ideas",
       "file": "pages/ideas.md",
       "type": "work",
-      "status": "retrieval_pending"
+      "status": "extracted"
     },
     {
       "url": "https://simplechile.com/web/los-consumidores",
       "file": "pages/los-consumidores.md",
       "type": "consumer",
-      "status": "retrieval_pending"
+      "status": "extracted"
     },
     {
       "url": "https://www.linkedin.com/company/simple-chile/",
@@ -44,9 +44,21 @@
   ],
   "discovery_notes": [
     "Site navigation confirms: HOME, MANIFIESTO, NOSOTROS, CLIENTES, IDEAS, CONSUMIDOR, CONTACTO and CANAL DE DENUNCIA.",
-    "IDEAS and LOS CONSUMIDORES are registered but their body content could not yet be reliably retrieved in the current environment.",
-    "The official site navigation visibly links Instagram, LinkedIn, TikTok, Facebook and X; exact current profile URLs remain to be verified except LinkedIn.",
-    "Direct retrieval of the site root, robots.txt and sitemap.xml was blocked in the current retrieval environment.",
-    "This snapshot must not be treated as proof that no additional internal pages exist."
+    "IDEAS was extracted from supplied page HTML: 24 distinct YouTube-linked portfolio pieces.",
+    "LOS CONSUMIDORES pages 1 and 2 were extracted from supplied page HTML: 12 published consumer observations with attributed sources.",
+    "Consumer statistics are historical site content and must not be represented as current without fresh verification.",
+    "The official site navigation visibly links Instagram, LinkedIn, TikTok, Facebook and X; exact current profile URLs remain to be verified except LinkedIn."
+  ],
+  "structured_data": [
+    {
+      "file": "trabajos.json",
+      "type": "portfolio",
+      "records": 24
+    },
+    {
+      "file": "consumidores.json",
+      "type": "consumer_insights",
+      "records": 12
+    }
   ]
 }
