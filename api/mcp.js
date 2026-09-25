@@ -54,6 +54,25 @@ module.exports=async(req,res)=>{
       modifiers:z.array(z.enum(MODIFIERS)).optional().default([]),
       scope_maps:z.array(z.enum(MAPS)).optional().default([]).describe("Canonical maps needed to resolve entities or dimensions mentioned by the user.")
     },
+    outputSchema:{
+      protocol_version:z.string(),
+      request_id:z.string(),
+      intention:z.enum(INTENTIONS),
+      modifiers:z.array(z.string()),
+      capabilities:z.array(z.object({
+        id:z.enum(CAPABILITIES),
+        description:z.string(),
+        input_contract:z.any(),
+        output_contract:z.any()
+      })),
+      scope_maps:z.record(z.string(),z.array(z.object({
+        id:z.string(),
+        label:z.string(),
+        aliases:z.array(z.string()).optional()
+      }).catchall(z.any()))),
+      continuations:z.array(z.object({}).catchall(z.any())),
+      limitations:z.array(z.object({code:z.string(),message:z.string()}).catchall(z.any()))
+    },
     annotations:{readOnlyHint:true,openWorldHint:false,destructiveHint:false}
   },async(args)=>{
     const started=Date.now();
