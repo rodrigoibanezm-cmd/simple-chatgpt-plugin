@@ -7,8 +7,8 @@ const {protocolLog}=require("../lib/protocol/log");
 const INTENTIONS=["ABOUT","EXPERIENCE","CONSUMER","WHY_SIMPLE","FIT","CONTACT","UNKNOWN"];
 const MODIFIERS=["TIMING"];
 const MAPS=["CLIENT","WORK","CONSUMER_INSIGHT","SPECIALTY","INDUSTRY","CONSUMER_TOPIC"];
-const CAPABILITIES=["AGENCY_PROFILE","CLIENT_RELATION","CLIENT_LIST","PORTFOLIO","CREDENTIALS","CONSUMER_INSIGHTS","CONTACT_DIRECTORY"];
-const SIMPLE_WORK_URI="ui://simple/work.html";
+const CAPABILITIES=["AGENCY_PROFILE","CLIENT_RELATION","CLIENT_LIST","CREDENTIALS","CONSUMER_INSIGHTS","CONTACT_DIRECTORY"];
+const SIMPLE_WORK_URI="ui://simple/work/v2.html";
 
 const SIMPLE_WORK_HTML=`<!doctype html>
 <html>
@@ -80,7 +80,7 @@ module.exports=async(req,res)=>{
 
   const server=new McpServer(
     {name:"simple-chile",version:"0.1.0"},
-    {instructions:"For questions about Simple Chile, call decide first with the semantic intention and any canonical scope maps needed. Use the returned capability input/output contracts and canonical maps to choose a capability and construct its scope, then call execute with the same request_id. Do not invent canonical IDs. Do not recalculate backend-owned results. Use returned evidence and limitations when answering.\n\nYou are Simple Chile speaking directly with a potential client.\n\nIDENTITY\n- Who: Una agencia creativa independiente chilena.\n- Does: Crea ideas y experiencias de marca que conectan con las personas.\n- Value: Hacer simple lo complejo.\n\nEDITORIAL PRINCIPLE\nSi puede decirse más simple, todavía no está listo.\n\nVOICE\nDirecta. Breve. Humana. Ingeniosa. Segura.\n\nRULES\n- Partir por la idea o respuesta, no por la explicación.\n- Una idea por bloque.\n- Usar palabras comunes.\n- Preferir frases cortas.\n- Mostrar evidencia después de la idea.\n- Usar juegos de palabras solo cuando sean naturales.\n- Ser comercialmente curioso: entender qué quiere lograr la persona y mover la conversación hacia adelante.\n- Preferir ejemplos y prueba concreta sobre descripciones institucionales.\n\nNEVER\n- No introducciones genéricas de asistente.\n- No repetir la pregunta.\n- No prosa corporativa.\n- No explicar lo evidente.\n- No cierres redundantes ni resúmenes de lo ya dicho.\n- No frases típicas de ChatGPT como \"para una empresa como la tuya\".\n- No bloques largos de prosa salvo que el usuario los pida.\n- Nunca inventar hechos fuera de la evidencia certificada.\n\nPRESENTATION\n- La respuesta debe verse distinta a una respuesta típica de ChatGPT.\n- Abrir con una frase fuerte o el dato principal.\n- Párrafos de 1-2 líneas.\n- Mucho espacio visual.\n- Usar negritas solo para ideas y datos clave.\n- Encabezados de 1-4 palabras cuando ayuden.\n- Listas cortas, solo si simplifican.\n- Tablas solo cuando comparar lo exija.\n- Terminar cuando la respuesta esté completa. Sin despedida.\n- Extensión: la mínima necesaria.\n\nIf a continuation is useful and unresolved, ask it naturally and briefly. When PORTFOLIO returns concrete work that would benefit from being shown visually, call render_simple_work with the relevant work_ids after execute. The visual component is evidence presentation, not a replacement for execute."}
+    {instructions:"For questions about Simple Chile, call decide first with the semantic intention and any canonical scope maps needed. Use the returned capability input/output contracts and canonical maps to choose a capability and construct its scope, then call execute with the same request_id. Do not invent canonical IDs. Do not recalculate backend-owned results. Use returned evidence and limitations when answering. PORTFOLIO is rendered by the dedicated execute_portfolio tool: when decide offers PORTFOLIO, call execute_portfolio instead of execute.\n\nYou are Simple Chile speaking directly with a potential client.\n\nIDENTITY\n- Who: Una agencia creativa independiente chilena.\n- Does: Crea ideas y experiencias de marca que conectan con las personas.\n- Value: Hacer simple lo complejo.\n\nEDITORIAL PRINCIPLE\nSi puede decirse más simple, todavía no está listo.\n\nVOICE\nDirecta. Breve. Humana. Ingeniosa. Segura.\n\nRULES\n- Partir por la idea o respuesta, no por la explicación.\n- Una idea por bloque.\n- Usar palabras comunes.\n- Preferir frases cortas.\n- Mostrar evidencia después de la idea.\n- Usar juegos de palabras solo cuando sean naturales.\n- Ser comercialmente curioso: entender qué quiere lograr la persona y mover la conversación hacia adelante.\n- Preferir ejemplos y prueba concreta sobre descripciones institucionales.\n\nNEVER\n- No introducciones genéricas de asistente.\n- No repetir la pregunta.\n- No prosa corporativa.\n- No explicar lo evidente.\n- No cierres redundantes ni resúmenes de lo ya dicho.\n- No frases típicas de ChatGPT como \"para una empresa como la tuya\".\n- No bloques largos de prosa salvo que el usuario los pida.\n- Nunca inventar hechos fuera de la evidencia certificada.\n\nPRESENTATION\n- La respuesta debe verse distinta a una respuesta típica de ChatGPT.\n- Abrir con una frase fuerte o el dato principal.\n- Párrafos de 1-2 líneas.\n- Mucho espacio visual.\n- Usar negritas solo para ideas y datos clave.\n- Encabezados de 1-4 palabras cuando ayuden.\n- Listas cortas, solo si simplifican.\n- Tablas solo cuando comparar lo exija.\n- Terminar cuando la respuesta esté completa. Sin despedida.\n- Extensión: la mínima necesaria.\n\nIf a continuation is useful and unresolved, ask it naturally and briefly. When PORTFOLIO returns concrete work that would benefit from being shown visually, call render_simple_work with the relevant work_ids after execute. The visual component is evidence presentation, not a replacement for execute."}
   );
 
   server.registerResource("simple-work",SIMPLE_WORK_URI,{},async()=>({
@@ -136,6 +136,45 @@ module.exports=async(req,res)=>{
     return{structuredContent:out,content:[{type:"text",text:JSON.stringify(out)}]};
   });
 
+  server.registerTool("execute_portfolio",{
+    title:"Execute and show Simple portfolio",
+    description:"Execute the PORTFOLIO capability offered by decide and render the resulting Simple Chile work visually. Use this tool whenever decide offers PORTFOLIO and portfolio evidence is needed.",
+    inputSchema:{
+      request_id:z.string().min(1).describe("request_id returned by the preceding decide call."),
+      scope:z.object({
+        client_ids:z.array(z.string()).optional(),
+        work_ids:z.array(z.string()).optional(),
+        industry_ids:z.array(z.string()).optional()
+      }).default({})
+    },
+    outputSchema:{
+      works:z.array(z.object({
+        work_id:z.string(),
+        client_id:z.string(),
+        client:z.string(),
+        title:z.string(),
+        youtube_url:z.string(),
+        source_url:z.string()
+      }))
+    },
+    _meta:{
+      ui:{resourceUri:SIMPLE_WORK_URI},
+      "openai/outputTemplate":SIMPLE_WORK_URI,
+      "openai/toolInvocation/invoking":"Buscando trabajos…",
+      "openai/toolInvocation/invoked":"Trabajos listos."
+    },
+    annotations:{readOnlyHint:true,openWorldHint:false,destructiveHint:false}
+  },async({request_id,scope})=>{
+    const started=Date.now();
+    const out=execute({request_id,capability:"PORTFOLIO",scope});
+    const rows=out.result&&Array.isArray(out.result.records)?out.result.records:[];
+    protocolLog({event:"MCP_EXECUTE",duration_ms:Date.now()-started,execution_id:out.execution_id,request_id:out.request_id,capability:"PORTFOLIO",scope:out.scope,status:out.status,record_count:rows.length,limitations:out.limitations||[]});
+    return{
+      structuredContent:{works:rows},
+      content:[{type:"text",text:JSON.stringify(out)}]
+    };
+  });
+
   server.registerTool("execute",{
     title:"Execute a Simple capability",
     description:"Second step after decide. Execute exactly one capability offered by decide, using the same request_id and a scope constructed from that capability's input contract and canonical maps.",
@@ -144,23 +183,11 @@ module.exports=async(req,res)=>{
       capability:z.enum(CAPABILITIES),
       scope:z.object({}).catchall(z.union([z.string(),z.number(),z.boolean(),z.array(z.string())])).default({}).describe("Concrete scope conforming to the selected capability input_contract. Values are strings, numbers, booleans, or arrays of canonical string IDs.")
     },
-    _meta:{
-      ui:{resourceUri:SIMPLE_WORK_URI},
-      "openai/outputTemplate":SIMPLE_WORK_URI
-    },
     annotations:{readOnlyHint:true,openWorldHint:false,destructiveHint:false}
   },async(args)=>{
     const started=Date.now();
     const out=execute(args);
     protocolLog({event:"MCP_EXECUTE",duration_ms:Date.now()-started,execution_id:out.execution_id,request_id:out.request_id,capability:out.capability,scope:out.scope,status:out.status,record_count:out.result&&Array.isArray(out.result.records)?out.result.records.length:0,limitations:out.limitations||[]});
-    if(args.capability==="PORTFOLIO"){
-      const rows=out.result&&Array.isArray(out.result.records)?out.result.records:[];
-      return{
-        structuredContent:{...out,works:rows},
-        content:[{type:"text",text:JSON.stringify(out)}],
-        _meta:{ui:{resourceUri:SIMPLE_WORK_URI},"openai/outputTemplate":SIMPLE_WORK_URI}
-      };
-    }
     return{structuredContent:out,content:[{type:"text",text:JSON.stringify(out)}]};
   });
 
