@@ -1,5 +1,5 @@
 {
-  "version": "0.3",
+  "version": "0.4",
   "purpose": "Authoritative capability catalog returned by DECIDE. Each capability publishes both the deterministic EXECUTE input contract and the R2 output contract.",
   "capabilities": {
     "AGENCY_PROFILE": {
@@ -76,6 +76,18 @@
               "fields": {
                 "client_id": "string",
                 "label": "string",
+                "logo_url": "string | null",
+                "industry_id": "string",
+                "industry_label": "string",
+                "published_works": {
+                  "type": "array",
+                  "items": {
+                    "work_id": "string",
+                    "title": "string",
+                    "youtube_url": "string",
+                    "source_url": "string"
+                  }
+                },
                 "published_as_client": "boolean"
               }
             }
@@ -116,7 +128,19 @@
               "type": "object",
               "fields": {
                 "client_id": "string",
-                "label": "string"
+                "label": "string",
+                "logo_url": "string | null",
+                "industry_id": "string",
+                "industry_label": "string",
+                "published_works": {
+                  "type": "array",
+                  "items": {
+                    "work_id": "string",
+                    "title": "string",
+                    "youtube_url": "string",
+                    "source_url": "string"
+                  }
+                }
               }
             }
           },
