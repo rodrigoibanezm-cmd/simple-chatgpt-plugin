@@ -1,6 +1,6 @@
 {
-  "version": "0.4",
-  "purpose": "Authoritative capability catalog returned by DECIDE. Capabilities are distinguished by the semantic evidence they certify, not by keywords or query phrasing.",
+  "version": "0.5",
+  "purpose": "Authoritative capability catalog returned by DECIDE. Each CapabilityContract declares semantic evidence, deterministic input/output contracts, and the executor tool that materializes it.",
   "selection_principles": [
     "Choose capabilities by the evidence needed to answer the user's outcome, not by words appearing in the question.",
     "Prefer the most specific certified evidence that directly answers the question.",
@@ -9,61 +9,423 @@
     "Use multiple capabilities only when the user's outcome genuinely requires synthesis across different evidence types."
   ],
   "selection_examples": [
-    {"question":"¿Han trabajado con Colun?","capabilities":["CLIENT_RELATION"],"why":"The requested evidence is whether one specific client relationship is published."},
-    {"question":"Muéstrame trabajos en automotriz.","capabilities":["PORTFOLIO"],"why":"The requested evidence is concrete published work, bounded by industry."},
-    {"question":"¿Qué clientes tienen?","capabilities":["CLIENT_LIST"],"why":"The requested evidence is the published client list itself."},
-    {"question":"¿Qué premios o reconocimientos tienen?","capabilities":["CREDENTIALS"],"why":"The requested evidence is credentials."},
-    {"question":"¿Por qué debería considerar a Simple?","capabilities":["AGENCY_PROFILE","CLIENT_LIST","PORTFOLIO","CREDENTIALS"],"why":"This is a synthesis outcome that may require several distinct evidence types; execute only those needed for the answer."}
+    {
+      "question": "¿Han trabajado con Colun?",
+      "capabilities": [
+        "CLIENT_RELATION"
+      ],
+      "why": "The requested evidence is whether one specific client relationship is published."
+    },
+    {
+      "question": "Muéstrame trabajos en automotriz.",
+      "capabilities": [
+        "PORTFOLIO"
+      ],
+      "why": "The requested evidence is concrete published work, bounded by industry."
+    },
+    {
+      "question": "¿Qué clientes tienen?",
+      "capabilities": [
+        "CLIENT_LIST"
+      ],
+      "why": "The requested evidence is the published client list itself."
+    },
+    {
+      "question": "¿Qué premios o reconocimientos tienen?",
+      "capabilities": [
+        "CREDENTIALS"
+      ],
+      "why": "The requested evidence is credentials."
+    },
+    {
+      "question": "¿Por qué debería considerar a Simple?",
+      "capabilities": [
+        "AGENCY_PROFILE",
+        "CLIENT_LIST",
+        "PORTFOLIO",
+        "CREDENTIALS"
+      ],
+      "why": "This is a synthesis outcome that may require several distinct evidence types; execute only those needed for the answer."
+    }
   ],
   "capabilities": {
     "AGENCY_PROFILE": {
       "description": "Return certified institutional profile facts.",
-      "evidence_semantics": {"type":"AGENCY_FACT","answers":"Who Simple is, who is behind it, what it declares it can do, and its published positioning or associations.","coverage":"Published institutional profile evidence."},
-      "intentions": ["ABOUT","WHY_SIMPLE","FIT"],
-      "input_contract": {"section":{"type":"enum","values":["IDENTITY","TEAM","CAPABILITIES","POSITIONING","ASSOCIATIONS"],"required":false}},
-      "output_contract": {"status":["OK","NO_DATA","INVALID_SCOPE","NOT_APPLICABLE","LIMITED_COVERAGE"],"result":{"scope":"validated input scope","records":{"type":"array","items":{"type":"object","description":"Profile facts; when no section is requested records are grouped by section."}},"evidence":"source provenance records"},"context":"object | null","limitations":[]}
+      "evidence_semantics": {
+        "type": "AGENCY_FACT",
+        "answers": "Who Simple is, who is behind it, what it declares it can do, and its published positioning or associations.",
+        "coverage": "Published institutional profile evidence."
+      },
+      "intentions": [
+        "ABOUT",
+        "WHY_SIMPLE",
+        "FIT"
+      ],
+      "input_contract": {
+        "section": {
+          "type": "enum",
+          "values": [
+            "IDENTITY",
+            "TEAM",
+            "CAPABILITIES",
+            "POSITIONING",
+            "ASSOCIATIONS"
+          ],
+          "required": false
+        }
+      },
+      "output_contract": {
+        "status": [
+          "OK",
+          "NO_DATA",
+          "INVALID_SCOPE",
+          "NOT_APPLICABLE",
+          "LIMITED_COVERAGE"
+        ],
+        "result": {
+          "scope": "validated input scope",
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "Profile facts; when no section is requested records are grouped by section."
+            }
+          },
+          "evidence": "source provenance records"
+        },
+        "context": "object | null",
+        "limitations": []
+      },
+      "executor": {
+        "tool": "execute",
+        "capability": "AGENCY_PROFILE"
+      }
     },
     "CLIENT_RELATION": {
       "description": "Return whether a canonical client is present in Simple's published client evidence.",
-      "evidence_semantics": {"type":"CLIENT_RELATION","answers":"Whether one specific organization is explicitly present in Simple's published client evidence.","coverage":"Only canonical clients represented in the published CLIENTES evidence."},
-      "intentions": ["EXPERIENCE","FIT","WHY_SIMPLE"],
-      "input_contract": {"client_id":{"type":"canonical_id","map":"CLIENT","required":true}},
-      "output_contract": {"status":["OK","NO_DATA","INVALID_SCOPE","NOT_APPLICABLE","LIMITED_COVERAGE"],"result":{"scope":"validated input scope","records":{"type":"array","items":{"type":"object","fields":{"client_id":"string","label":"string","published_as_client":"boolean"}}},"evidence":"source provenance records"},"context":"object | null","limitations":[]}
+      "evidence_semantics": {
+        "type": "CLIENT_RELATION",
+        "answers": "Whether one specific organization is explicitly present in Simple's published client evidence.",
+        "coverage": "Only canonical clients represented in the published CLIENTES evidence."
+      },
+      "intentions": [
+        "EXPERIENCE",
+        "FIT",
+        "WHY_SIMPLE"
+      ],
+      "input_contract": {
+        "client_id": {
+          "type": "canonical_id",
+          "map": "CLIENT",
+          "required": true
+        }
+      },
+      "output_contract": {
+        "status": [
+          "OK",
+          "NO_DATA",
+          "INVALID_SCOPE",
+          "NOT_APPLICABLE",
+          "LIMITED_COVERAGE"
+        ],
+        "result": {
+          "scope": "validated input scope",
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "fields": {
+                "client_id": "string",
+                "label": "string",
+                "published_as_client": "boolean"
+              }
+            }
+          },
+          "evidence": "source provenance records"
+        },
+        "context": "object | null",
+        "limitations": []
+      },
+      "executor": {
+        "tool": "execute",
+        "capability": "CLIENT_RELATION"
+      }
     },
     "CLIENT_LIST": {
       "description": "Return organizations explicitly shown in Simple's published client list.",
-      "evidence_semantics": {"type":"CLIENT","answers":"Which organizations are explicitly published as clients.","coverage":"CLIENTES page only. A canonical CLIENT that exists because it appears in PORTFOLIO is not automatically covered by CLIENT_LIST."},
-      "intentions": ["EXPERIENCE","WHY_SIMPLE","FIT"],
-      "input_contract": {"client_ids":{"type":"canonical_id_array","map":"CLIENT","required":false}},
-      "output_contract": {"status":["OK","NO_DATA","INVALID_SCOPE","NOT_APPLICABLE","LIMITED_COVERAGE"],"result":{"scope":"validated input scope","records":{"type":"array","items":{"type":"object","fields":{"client_id":"string","label":"string"}}},"evidence":"source provenance records"},"context":"object | null","limitations":[]}
+      "evidence_semantics": {
+        "type": "CLIENT",
+        "answers": "Which organizations are explicitly published as clients.",
+        "coverage": "CLIENTES page only. A canonical CLIENT that exists because it appears in PORTFOLIO is not automatically covered by CLIENT_LIST."
+      },
+      "intentions": [
+        "EXPERIENCE",
+        "WHY_SIMPLE",
+        "FIT"
+      ],
+      "input_contract": {
+        "client_ids": {
+          "type": "canonical_id_array",
+          "map": "CLIENT",
+          "required": false
+        }
+      },
+      "output_contract": {
+        "status": [
+          "OK",
+          "NO_DATA",
+          "INVALID_SCOPE",
+          "NOT_APPLICABLE",
+          "LIMITED_COVERAGE"
+        ],
+        "result": {
+          "scope": "validated input scope",
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "fields": {
+                "client_id": "string",
+                "label": "string"
+              }
+            }
+          },
+          "evidence": "source provenance records"
+        },
+        "context": "object | null",
+        "limitations": []
+      },
+      "executor": {
+        "tool": "execute",
+        "capability": "CLIENT_LIST"
+      }
     },
     "PORTFOLIO": {
       "description": "Return concrete published Simple work.",
-      "evidence_semantics": {"type":"WORK","answers":"What concrete campaigns, ideas or published work demonstrate Simple's experience.","coverage":"Published IDEAS work; may be bounded by canonical work, client or editorial industry classification."},
-      "intentions": ["EXPERIENCE","WHY_SIMPLE","FIT"],
-      "input_contract": {"client_ids":{"type":"canonical_id_array","map":"CLIENT","required":false},"work_ids":{"type":"canonical_id_array","map":"WORK","required":false},"industry_ids":{"type":"canonical_id_array","map":"INDUSTRY","required":false}},
-      "output_contract": {"status":["OK","NO_DATA","INVALID_SCOPE","NOT_APPLICABLE","LIMITED_COVERAGE"],"result":{"scope":"validated input scope","records":{"type":"array","items":{"type":"object","fields":{"work_id":"string","client_id":"string","client":"string","title":"string","youtube_url":"string","source_url":"string"}}},"evidence":"source provenance records"},"context":"object | null","limitations":[]}
+      "evidence_semantics": {
+        "type": "WORK",
+        "answers": "What concrete campaigns, ideas or published work demonstrate Simple's experience.",
+        "coverage": "Published IDEAS work; may be bounded by canonical work, client or editorial industry classification."
+      },
+      "intentions": [
+        "EXPERIENCE",
+        "WHY_SIMPLE",
+        "FIT"
+      ],
+      "input_contract": {
+        "client_ids": {
+          "type": "canonical_id_array",
+          "map": "CLIENT",
+          "required": false
+        },
+        "work_ids": {
+          "type": "canonical_id_array",
+          "map": "WORK",
+          "required": false
+        },
+        "industry_ids": {
+          "type": "canonical_id_array",
+          "map": "INDUSTRY",
+          "required": false
+        }
+      },
+      "output_contract": {
+        "status": [
+          "OK",
+          "NO_DATA",
+          "INVALID_SCOPE",
+          "NOT_APPLICABLE",
+          "LIMITED_COVERAGE"
+        ],
+        "result": {
+          "scope": "validated input scope",
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "fields": {
+                "work_id": "string",
+                "client_id": "string",
+                "client": "string",
+                "title": "string",
+                "youtube_url": "string",
+                "source_url": "string"
+              }
+            }
+          },
+          "evidence": "source provenance records"
+        },
+        "context": "object | null",
+        "limitations": []
+      },
+      "executor": {
+        "tool": "execute_portfolio"
+      }
     },
     "CREDENTIALS": {
       "description": "Return published awards, recognitions and associations.",
-      "evidence_semantics": {"type":"CREDENTIAL","answers":"What published awards, recognitions or associations support Simple's credentials.","coverage":"Published institutional credential evidence."},
-      "intentions": ["ABOUT","EXPERIENCE","WHY_SIMPLE","FIT"],
-      "input_contract": {"credential_type":{"type":"enum","values":["AWARD","RECOGNITION","ASSOCIATION","ALL"],"required":false}},
-      "output_contract": {"status":["OK","NO_DATA","INVALID_SCOPE","NOT_APPLICABLE","LIMITED_COVERAGE"],"result":{"scope":"validated input scope","records":{"type":"array","items":{"type":"object","fields":{"credential_type":"AWARD | RECOGNITION | ASSOCIATION","name":"string"}}},"evidence":"source provenance records"},"context":"object | null","limitations":[]}
+      "evidence_semantics": {
+        "type": "CREDENTIAL",
+        "answers": "What published awards, recognitions or associations support Simple's credentials.",
+        "coverage": "Published institutional credential evidence."
+      },
+      "intentions": [
+        "ABOUT",
+        "EXPERIENCE",
+        "WHY_SIMPLE",
+        "FIT"
+      ],
+      "input_contract": {
+        "credential_type": {
+          "type": "enum",
+          "values": [
+            "AWARD",
+            "RECOGNITION",
+            "ASSOCIATION",
+            "ALL"
+          ],
+          "required": false
+        }
+      },
+      "output_contract": {
+        "status": [
+          "OK",
+          "NO_DATA",
+          "INVALID_SCOPE",
+          "NOT_APPLICABLE",
+          "LIMITED_COVERAGE"
+        ],
+        "result": {
+          "scope": "validated input scope",
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "fields": {
+                "credential_type": "AWARD | RECOGNITION | ASSOCIATION",
+                "name": "string"
+              }
+            }
+          },
+          "evidence": "source provenance records"
+        },
+        "context": "object | null",
+        "limitations": []
+      },
+      "executor": {
+        "tool": "execute",
+        "capability": "CREDENTIALS"
+      }
     },
     "CONSUMER_INSIGHTS": {
       "description": "Return historical consumer statements published by Simple. Results must preserve source attribution and historical-status warning.",
-      "evidence_semantics": {"type":"CONSUMER_INSIGHT","answers":"What consumer observations or statistics Simple has published.","coverage":"Historical published consumer material only; it does not certify current-market facts."},
-      "intentions": ["CONSUMER","FIT"],
-      "input_contract": {"insight_ids":{"type":"canonical_id_array","map":"CONSUMER_INSIGHT","required":false},"topic_ids":{"type":"canonical_id_array","map":"CONSUMER_TOPIC","required":false}},
-      "output_contract": {"status":["OK","NO_DATA","INVALID_SCOPE","NOT_APPLICABLE","LIMITED_COVERAGE"],"result":{"scope":"validated input scope","records":{"type":"array","items":{"type":"object","fields":{"insight_id":"string","statement":"string","attributed_source":"string","page":"string","source_url":"string","historical":"boolean"}}},"limitations":["HISTORICAL_SOURCE"],"evidence":"source provenance records"},"context":"object | null","limitations":["HISTORICAL_SOURCE"]}
+      "evidence_semantics": {
+        "type": "CONSUMER_INSIGHT",
+        "answers": "What consumer observations or statistics Simple has published.",
+        "coverage": "Historical published consumer material only; it does not certify current-market facts."
+      },
+      "intentions": [
+        "CONSUMER",
+        "FIT"
+      ],
+      "input_contract": {
+        "insight_ids": {
+          "type": "canonical_id_array",
+          "map": "CONSUMER_INSIGHT",
+          "required": false
+        },
+        "topic_ids": {
+          "type": "canonical_id_array",
+          "map": "CONSUMER_TOPIC",
+          "required": false
+        }
+      },
+      "output_contract": {
+        "status": [
+          "OK",
+          "NO_DATA",
+          "INVALID_SCOPE",
+          "NOT_APPLICABLE",
+          "LIMITED_COVERAGE"
+        ],
+        "result": {
+          "scope": "validated input scope",
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "fields": {
+                "insight_id": "string",
+                "statement": "string",
+                "attributed_source": "string",
+                "page": "string",
+                "source_url": "string",
+                "historical": "boolean"
+              }
+            }
+          },
+          "limitations": [
+            "HISTORICAL_SOURCE"
+          ],
+          "evidence": "source provenance records"
+        },
+        "context": "object | null",
+        "limitations": [
+          "HISTORICAL_SOURCE"
+        ]
+      },
+      "executor": {
+        "tool": "execute",
+        "capability": "CONSUMER_INSIGHTS"
+      }
     },
     "CONTACT_DIRECTORY": {
       "description": "Return published Simple contact routes, optionally by specialty.",
-      "evidence_semantics": {"type":"CONTACT_ROUTE","answers":"Which published contact route is available, optionally for a specialty.","coverage":"Published Simple contact evidence."},
-      "intentions": ["CONTACT"],
-      "input_contract": {"specialty_id":{"type":"canonical_id","map":"SPECIALTY","required":false}},
-      "output_contract": {"status":["OK","NO_DATA","INVALID_SCOPE","NOT_APPLICABLE","LIMITED_COVERAGE"],"result":{"scope":"validated input scope","records":{"type":"array","items":{"type":"object","fields":{"specialty_id":"string","specialty":"string","email":"string"}}},"evidence":"source provenance records"},"context":"object | null","limitations":[]}
+      "evidence_semantics": {
+        "type": "CONTACT_ROUTE",
+        "answers": "Which published contact route is available, optionally for a specialty.",
+        "coverage": "Published Simple contact evidence."
+      },
+      "intentions": [
+        "CONTACT"
+      ],
+      "input_contract": {
+        "specialty_id": {
+          "type": "canonical_id",
+          "map": "SPECIALTY",
+          "required": false
+        }
+      },
+      "output_contract": {
+        "status": [
+          "OK",
+          "NO_DATA",
+          "INVALID_SCOPE",
+          "NOT_APPLICABLE",
+          "LIMITED_COVERAGE"
+        ],
+        "result": {
+          "scope": "validated input scope",
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "fields": {
+                "specialty_id": "string",
+                "specialty": "string",
+                "email": "string"
+              }
+            }
+          },
+          "evidence": "source provenance records"
+        },
+        "context": "object | null",
+        "limitations": []
+      },
+      "executor": {
+        "tool": "execute",
+        "capability": "CONTACT_DIRECTORY"
+      }
     }
   },
   "notes": [
