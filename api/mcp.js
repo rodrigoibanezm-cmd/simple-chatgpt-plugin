@@ -70,6 +70,26 @@ module.exports=async(req,res)=>{
       capability:z.enum(CAPABILITIES),
       scope:z.object({}).catchall(z.union([z.string(),z.number(),z.boolean(),z.array(z.string())])).default({}).describe("Concrete scope conforming to the selected capability input_contract. Values are strings, numbers, booleans, or arrays of canonical string IDs.")
     },
+    outputSchema:{
+      protocol_version:z.string(),
+      request_id:z.string(),
+      execution_id:z.string(),
+      capability:z.enum(CAPABILITIES),
+      scope:z.object({}).catchall(z.any()),
+      status:z.enum(["OK","NO_DATA","INVALID_SCOPE","NOT_APPLICABLE"]),
+      result:z.object({
+        scope:z.object({}).catchall(z.any()),
+        records:z.array(z.object({}).catchall(z.any())),
+        evidence:z.array(z.object({
+          source_id:z.string(),
+          source_type:z.string(),
+          source_url:z.string(),
+          authority:z.string()
+        }).catchall(z.any()))
+      }),
+      context:z.nullable(z.any()),
+      limitations:z.array(z.object({code:z.string(),message:z.string()}).catchall(z.any()))
+    },
     annotations:{readOnlyHint:true,openWorldHint:false,destructiveHint:false}
   },async(args)=>{
     const started=Date.now();
