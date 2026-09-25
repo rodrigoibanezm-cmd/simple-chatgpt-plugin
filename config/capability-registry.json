@@ -341,6 +341,41 @@
         "context": "object | null",
         "limitations": []
       }
+    },
+    "MANIFESTO": {
+      "description": "Return Simple's certified published manifesto and official brand assets.",
+      "intentions": [
+        "ABOUT",
+        "WHY_SIMPLE",
+        "FIT"
+      ],
+      "input_contract": {},
+      "output_contract": {
+        "status": [
+          "OK",
+          "NO_DATA",
+          "INVALID_SCOPE",
+          "NOT_APPLICABLE",
+          "LIMITED_COVERAGE"
+        ],
+        "result": {
+          "scope": "validated input scope",
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "fields": {
+                "tagline": "string",
+                "statements": "string[]",
+                "brand_assets": "object"
+              }
+            }
+          },
+          "evidence": "source provenance records"
+        },
+        "context": "object | null",
+        "limitations": []
+      }
     }
   },
   "notes": [
