@@ -144,11 +144,23 @@ module.exports=async(req,res)=>{
       capability:z.enum(CAPABILITIES),
       scope:z.object({}).catchall(z.union([z.string(),z.number(),z.boolean(),z.array(z.string())])).default({}).describe("Concrete scope conforming to the selected capability input_contract. Values are strings, numbers, booleans, or arrays of canonical string IDs.")
     },
+    _meta:{
+      ui:{resourceUri:SIMPLE_WORK_URI},
+      "openai/outputTemplate":SIMPLE_WORK_URI
+    },
     annotations:{readOnlyHint:true,openWorldHint:false,destructiveHint:false}
   },async(args)=>{
     const started=Date.now();
     const out=execute(args);
     protocolLog({event:"MCP_EXECUTE",duration_ms:Date.now()-started,execution_id:out.execution_id,request_id:out.request_id,capability:out.capability,scope:out.scope,status:out.status,record_count:out.result&&Array.isArray(out.result.records)?out.result.records.length:0,limitations:out.limitations||[]});
+    if(args.capability==="PORTFOLIO"){
+      const rows=out.result&&Array.isArray(out.result.records)?out.result.records:[];
+      return{
+        structuredContent:{...out,works:rows},
+        content:[{type:"text",text:JSON.stringify(out)}],
+        _meta:{ui:{resourceUri:SIMPLE_WORK_URI},"openai/outputTemplate":SIMPLE_WORK_URI}
+      };
+    }
     return{structuredContent:out,content:[{type:"text",text:JSON.stringify(out)}]};
   });
 
