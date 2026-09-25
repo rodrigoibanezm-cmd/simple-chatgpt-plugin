@@ -1,61 +1,9 @@
 {
-  "version": "0.5",
-  "purpose": "Authoritative capability catalog returned by DECIDE. Each CapabilityContract declares semantic evidence, deterministic input/output contracts, and the executor tool that materializes it.",
-  "selection_principles": [
-    "Choose capabilities by the evidence needed to answer the user's outcome, not by words appearing in the question.",
-    "Prefer the most specific certified evidence that directly answers the question.",
-    "Canonical identity and capability coverage are separate: an ID may exist globally without being valid evidence for every capability.",
-    "Do not execute a capability when the requested scope is outside that capability's evidence coverage.",
-    "Use multiple capabilities only when the user's outcome genuinely requires synthesis across different evidence types."
-  ],
-  "selection_examples": [
-    {
-      "question": "¿Han trabajado con Colun?",
-      "capabilities": [
-        "CLIENT_RELATION"
-      ],
-      "why": "The requested evidence is whether one specific client relationship is published."
-    },
-    {
-      "question": "Muéstrame trabajos en automotriz.",
-      "capabilities": [
-        "PORTFOLIO"
-      ],
-      "why": "The requested evidence is concrete published work, bounded by industry."
-    },
-    {
-      "question": "¿Qué clientes tienen?",
-      "capabilities": [
-        "CLIENT_LIST"
-      ],
-      "why": "The requested evidence is the published client list itself."
-    },
-    {
-      "question": "¿Qué premios o reconocimientos tienen?",
-      "capabilities": [
-        "CREDENTIALS"
-      ],
-      "why": "The requested evidence is credentials."
-    },
-    {
-      "question": "¿Por qué debería considerar a Simple?",
-      "capabilities": [
-        "AGENCY_PROFILE",
-        "CLIENT_LIST",
-        "PORTFOLIO",
-        "CREDENTIALS"
-      ],
-      "why": "This is a synthesis outcome that may require several distinct evidence types; execute only those needed for the answer."
-    }
-  ],
+  "version": "0.3",
+  "purpose": "Authoritative capability catalog returned by DECIDE. Each capability publishes both the deterministic EXECUTE input contract and the R2 output contract.",
   "capabilities": {
     "AGENCY_PROFILE": {
       "description": "Return certified institutional profile facts.",
-      "evidence_semantics": {
-        "type": "AGENCY_FACT",
-        "answers": "Who Simple is, who is behind it, what it declares it can do, and its published positioning or associations.",
-        "coverage": "Published institutional profile evidence."
-      },
       "intentions": [
         "ABOUT",
         "WHY_SIMPLE",
@@ -95,19 +43,10 @@
         },
         "context": "object | null",
         "limitations": []
-      },
-      "executor": {
-        "tool": "execute",
-        "capability": "AGENCY_PROFILE"
       }
     },
     "CLIENT_RELATION": {
       "description": "Return whether a canonical client is present in Simple's published client evidence.",
-      "evidence_semantics": {
-        "type": "CLIENT_RELATION",
-        "answers": "Whether one specific organization is explicitly present in Simple's published client evidence.",
-        "coverage": "Only canonical clients represented in the published CLIENTES evidence."
-      },
       "intentions": [
         "EXPERIENCE",
         "FIT",
@@ -145,19 +84,10 @@
         },
         "context": "object | null",
         "limitations": []
-      },
-      "executor": {
-        "tool": "execute",
-        "capability": "CLIENT_RELATION"
       }
     },
     "CLIENT_LIST": {
-      "description": "Return organizations explicitly shown in Simple's published client list.",
-      "evidence_semantics": {
-        "type": "CLIENT",
-        "answers": "Which organizations are explicitly published as clients.",
-        "coverage": "CLIENTES page only. A canonical CLIENT that exists because it appears in PORTFOLIO is not automatically covered by CLIENT_LIST."
-      },
+      "description": "Return published clients, optionally bounded by canonical client selection.",
       "intentions": [
         "EXPERIENCE",
         "WHY_SIMPLE",
@@ -194,19 +124,10 @@
         },
         "context": "object | null",
         "limitations": []
-      },
-      "executor": {
-        "tool": "execute",
-        "capability": "CLIENT_LIST"
       }
     },
     "PORTFOLIO": {
-      "description": "Return concrete published Simple work.",
-      "evidence_semantics": {
-        "type": "WORK",
-        "answers": "What concrete campaigns, ideas or published work demonstrate Simple's experience.",
-        "coverage": "Published IDEAS work; may be bounded by canonical work, client or editorial industry classification."
-      },
+      "description": "Return concrete published Simple work, optionally bounded by client.",
       "intentions": [
         "EXPERIENCE",
         "WHY_SIMPLE",
@@ -257,18 +178,10 @@
         },
         "context": "object | null",
         "limitations": []
-      },
-      "executor": {
-        "tool": "execute_portfolio"
       }
     },
     "CREDENTIALS": {
       "description": "Return published awards, recognitions and associations.",
-      "evidence_semantics": {
-        "type": "CREDENTIAL",
-        "answers": "What published awards, recognitions or associations support Simple's credentials.",
-        "coverage": "Published institutional credential evidence."
-      },
       "intentions": [
         "ABOUT",
         "EXPERIENCE",
@@ -311,19 +224,10 @@
         },
         "context": "object | null",
         "limitations": []
-      },
-      "executor": {
-        "tool": "execute",
-        "capability": "CREDENTIALS"
       }
     },
     "CONSUMER_INSIGHTS": {
       "description": "Return historical consumer statements published by Simple. Results must preserve source attribution and historical-status warning.",
-      "evidence_semantics": {
-        "type": "CONSUMER_INSIGHT",
-        "answers": "What consumer observations or statistics Simple has published.",
-        "coverage": "Historical published consumer material only; it does not certify current-market facts."
-      },
       "intentions": [
         "CONSUMER",
         "FIT"
@@ -373,19 +277,10 @@
         "limitations": [
           "HISTORICAL_SOURCE"
         ]
-      },
-      "executor": {
-        "tool": "execute",
-        "capability": "CONSUMER_INSIGHTS"
       }
     },
     "CONTACT_DIRECTORY": {
       "description": "Return published Simple contact routes, optionally by specialty.",
-      "evidence_semantics": {
-        "type": "CONTACT_ROUTE",
-        "answers": "Which published contact route is available, optionally for a specialty.",
-        "coverage": "Published Simple contact evidence."
-      },
       "intentions": [
         "CONTACT"
       ],
@@ -421,10 +316,6 @@
         },
         "context": "object | null",
         "limitations": []
-      },
-      "executor": {
-        "tool": "execute",
-        "capability": "CONTACT_DIRECTORY"
       }
     }
   },
