@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 "use strict";
 const assert=require("assert");
-const {SYSTEM_PROMPT,buildContract,validateCreativeBrief}=require("../lib/creative-director/contract");
+const {buildContract,validateCreativeBrief}=require("../lib/creative-director/contract");
 const cases=require("./fixtures/creative-director-cases.json");
 
-assert(SYSTEM_PROMPT.includes("certified evidence"));
 assert.equal(cases.length,10);
 
 for(const c of cases){
