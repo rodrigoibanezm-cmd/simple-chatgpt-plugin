@@ -2,7 +2,7 @@
 "use strict";
 const fs=require("fs");
 const path=require("path");
-const {SYSTEM_PROMPT,buildContract,validateCreativeBrief}=require("../lib/creative-director/contract");
+const {buildContract,validateCreativeBrief}=require("../lib/creative-director/contract");
 const cases=require("../tests/fixtures/creative-director-cases.json");
 
 function arg(name){const i=process.argv.indexOf(name);return i>=0?process.argv[i+1]:null;}
@@ -24,7 +24,6 @@ const contract=buildContract({
 
 const journal={
   case_id:selected.id,
-  system_prompt:SYSTEM_PROMPT,
   input:contract,
   raw_llm_output:null,
   validation:null
