@@ -66,11 +66,12 @@ window.addEventListener("message",function init(e){if(e.data?.id===id){window.pa
 </script></body></html>`;
 
 module.exports=async(req,res)=>{
+  if(req.method==="GET") return res.status(200).json({status:"ok",service:"simple-chile-mcp"});
   if(req.method!=="POST") return res.status(405).json({error:"METHOD_NOT_ALLOWED"});
   const [{McpServer},{StreamableHTTPServerTransport},{z},{registerAppResource,registerAppTool,RESOURCE_MIME_TYPE}]=await Promise.all([
     import("@modelcontextprotocol/sdk/server/mcp.js"),
     import("@modelcontextprotocol/sdk/server/streamableHttp.js"),
-    import("zod"),
+    import("zod").then(m=>({z:m.z||m.default?.z||m.default})),
     import("@modelcontextprotocol/ext-apps/server")
   ]);
 
