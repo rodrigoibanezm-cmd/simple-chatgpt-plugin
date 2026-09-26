@@ -9,7 +9,7 @@
       "includeFiles": "{config/**,data/simple/**}"
     },
     "api/mcp.js": {
-      "includeFiles": "{config/**,data/simple/**}"
+      "includeFiles": "{config/**,data/simple/**,lib/**}"
     }
   },
   "rewrites": [
