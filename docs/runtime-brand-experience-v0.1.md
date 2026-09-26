@@ -50,15 +50,11 @@ Asignar solamente un personaje o título al modelo no se considera suficiente. L
 
 ## Creative Director v0.1
 
-Se acordó mantener una instrucción de sistema mínima y entregar el trabajo principalmente como un objeto JSON.
+El Director Creativo se ejecuta en el LLM que ya está operando dentro de ChatGPT. No existe una segunda llamada a un proveedor LLM desde el backend.
 
-### Instrucción de sistema
+El plugin entrega a ChatGPT evidencia certificada, assets y un contrato estructurado. ChatGPT utiliza además el contexto conversacional y el entorno de razonamiento y tools que ya posee para producir el CreativeBrief.
 
-```text
-Produce creative direction from the supplied contract.
-Treat certified evidence and assets as authoritative.
-Return only valid JSON matching the requested output schema.
-```
+El backend no intenta reconstruir ese contexto mediante una API externa.
 
 ### Contrato de entrada
 
@@ -231,7 +227,16 @@ Quiero conocer Simple en 15 segundos.
 }
 ```
 
+## Frontera de ejecución
+
+La inteligencia creativa permanece dentro de ChatGPT.
+
+El backend es responsable de producir evidencia y assets autorizados y de validar contratos determinísticamente. No es responsable de ejecutar un modelo creativo propio.
+
+Por lo tanto, Creative Director v0.1 no depende de `OPENAI_API_KEY`, `GEMINI_API_KEY` ni de otra API LLM externa.
+
 ## Restricciones establecidas
+
 
 - La pieza no se hardcodea por pregunta, industria o cliente.
 - La Dirección Creativa sólo puede utilizar evidencia y assets suministrados.
