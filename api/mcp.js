@@ -1,8 +1,5 @@
 "use strict";
 
-const {decide}=require("../lib/decide/engine");
-const {execute}=require("../lib/execute/engine");
-const {protocolLog}=require("../lib/protocol/log");
 
 const INTENTIONS=["ABOUT","EXPERIENCE","CONSUMER","WHY_SIMPLE","FIT","CONTACT","UNKNOWN"];
 const MODIFIERS=["TIMING"];
@@ -68,6 +65,9 @@ window.addEventListener("message",function init(e){if(e.data?.id===id){window.pa
 module.exports=async(req,res)=>{
   if(req.method==="GET") return res.status(200).json({status:"ok",service:"simple-chile-mcp"});
   if(req.method!=="POST") return res.status(405).json({error:"METHOD_NOT_ALLOWED"});
+  const {decide}=require("../lib/decide/engine");
+  const {execute}=require("../lib/execute/engine");
+  const {protocolLog}=require("../lib/protocol/log");
   const [{McpServer},{StreamableHTTPServerTransport},{z},{registerAppResource,registerAppTool,RESOURCE_MIME_TYPE}]=await Promise.all([
     import("@modelcontextprotocol/sdk/server/mcp.js"),
     import("@modelcontextprotocol/sdk/server/streamableHttp.js"),
