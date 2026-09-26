@@ -1,0 +1,62 @@
+[
+  {
+    "id": "ABOUT_15S",
+    "question": "Quiero conocer Simple en 15 segundos.",
+    "evidence": ["POSITIONING","FOUNDED_2011","TEAM_97","CAPABILITIES","WORK_007","WORK_010","WORK_019"],
+    "assets": ["WORK_007_THUMB","WORK_010_THUMB","WORK_019_THUMB"]
+  },
+  {
+    "id": "OUTDOOR",
+    "question": "¿Simple tiene experiencia con marcas outdoor?",
+    "evidence": ["WORK_009","WORK_010","WORK_019","COLUMBIA","BURTON"],
+    "assets": ["WORK_009_THUMB","WORK_010_THUMB","WORK_019_THUMB","COLUMBIA_LOGO","BURTON_LOGO"]
+  },
+  {
+    "id": "AUTOMOTIVE",
+    "question": "Estamos lanzando una marca automotriz. ¿Qué experiencia concreta tiene Simple?",
+    "evidence": ["WORK_007","WORK_017","INCHCAPE","VOLVO","JAC"],
+    "assets": ["WORK_007_THUMB","WORK_017_THUMB","INCHCAPE_LOGO","VOLVO_LOGO"]
+  },
+  {
+    "id": "WHY_SIMPLE",
+    "question": "Estamos evaluando tres agencias. ¿Por qué debería considerar a Simple?",
+    "evidence": ["POSITIONING","CAPABILITIES","FOUNDED_2011","TEAM_97","CREDENTIALS","WORK_003","WORK_004","WORK_010"],
+    "assets": ["WORK_003_THUMB","WORK_004_THUMB","WORK_010_THUMB"]
+  },
+  {
+    "id": "CAPABILITIES",
+    "question": "¿Qué puede hacer Simple por una marca?",
+    "evidence": ["CAPABILITIES","POSITIONING","WORK_001","WORK_003","WORK_010"],
+    "assets": ["WORK_001_THUMB","WORK_003_THUMB","WORK_010_THUMB"]
+  },
+  {
+    "id": "CREDENTIALS",
+    "question": "¿Qué credenciales respaldan a Simple?",
+    "evidence": ["CREDENTIALS","ASSOCIATIONS","FOUNDED_2011"],
+    "assets": []
+  },
+  {
+    "id": "WORK",
+    "question": "Muéstrame el tipo de trabajo que hace Simple.",
+    "evidence": ["WORK_001","WORK_003","WORK_004","WORK_007","WORK_009","WORK_010","WORK_017","WORK_019","WORK_022"],
+    "assets": ["WORK_001_THUMB","WORK_003_THUMB","WORK_004_THUMB","WORK_007_THUMB","WORK_009_THUMB","WORK_010_THUMB","WORK_017_THUMB","WORK_019_THUMB","WORK_022_THUMB"]
+  },
+  {
+    "id": "INDEPENDENT",
+    "question": "¿Qué significa que Simple sea una agencia independiente?",
+    "evidence": ["IDENTITY","POSITIONING","TEAM"],
+    "assets": []
+  },
+  {
+    "id": "TEAM",
+    "question": "¿Quién está detrás de Simple?",
+    "evidence": ["TEAM","TEAM_97","FOUNDED_2011"],
+    "assets": []
+  },
+  {
+    "id": "BRAND_FIT",
+    "question": "Soy una marca nueva entrando a Chile. ¿Simple podría ser un buen fit?",
+    "evidence": ["CAPABILITIES","POSITIONING","WORK_003","WORK_007","WORK_010","CLIENTS"],
+    "assets": ["WORK_003_THUMB","WORK_007_THUMB","WORK_010_THUMB"]
+  }
+]
