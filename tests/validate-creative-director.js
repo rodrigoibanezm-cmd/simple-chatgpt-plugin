@@ -37,4 +37,23 @@ for(const c of cases){
   assert(result.errors.some(x=>x.includes("INVENTED_REF")));
 }
 
-console.log("Creative Director v0.1 contract tests PASS: 10 cases");
+const dongfengCases=require("./fixtures/dongfeng-007-cases.json");
+assert.equal(dongfengCases.length,3);
+for(const c of dongfengCases){
+  const contract=buildContract({
+    user_question:c.question,
+    certified_evidence:c.evidence,
+    available_assets:c.assets
+  });
+  assert.deepEqual(contract.input.certified_evidence,c.evidence);
+  assert(contract.input.certified_evidence.every(e=>e.source==="https://cidef.cl/modelo/007/"));
+  const valid={
+    idea:"One idea",
+    message:"One message",
+    story:[{purpose:"proof",evidence_refs:[c.evidence[0].id],direction:"Show certified proof."}]
+  };
+  assert.deepEqual(validateCreativeBrief(valid,contract),{ok:true,errors:[]});
+  const invalid={...valid,story:[{...valid.story[0],evidence_refs:["UNVERIFIED_007_CLAIM"]}]};
+  assert.equal(validateCreativeBrief(invalid,contract).ok,false);
+}
+console.log("Creative Director contract tests PASS: 10 Simple + 3 Dongfeng 007 cases");
