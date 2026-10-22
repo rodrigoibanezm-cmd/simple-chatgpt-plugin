@@ -3,7 +3,10 @@
 const fs=require("fs");
 const path=require("path");
 const {buildContract,validateCreativeBrief}=require("../lib/creative-director/contract");
-const cases=require("../tests/fixtures/creative-director-cases.json");
+const cases=[
+  ...require("../tests/fixtures/creative-director-cases.json"),
+  ...require("../tests/fixtures/dongfeng-007-cases.json")
+];
 
 function arg(name){const i=process.argv.indexOf(name);return i>=0?process.argv[i+1]:null;}
 const caseId=arg("--case");
