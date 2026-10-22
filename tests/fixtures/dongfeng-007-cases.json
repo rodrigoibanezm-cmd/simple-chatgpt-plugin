@@ -1,0 +1,68 @@
+[
+  {
+    "id": "D007_DAILY",
+    "question": "¿Cómo sería manejar el Dongfeng 007 todos los días?",
+    "evidence": [
+      {
+        "id": "D007_REEV",
+        "fact": "El Dongfeng 007 REEV utiliza propulsión eléctrica con motor a combustión como extensor de rango.",
+        "source": "https://cidef.cl/modelo/007/"
+      },
+      {
+        "id": "D007_ELECTRIC_RANGE",
+        "fact": "Autonomía eléctrica de hasta 150 km WLTC.",
+        "source": "https://cidef.cl/modelo/007/"
+      },
+      {
+        "id": "D007_MODES",
+        "fact": "Modos ECO, Comfort y Sport.",
+        "source": "https://cidef.cl/modelo/007/"
+      }
+    ],
+    "assets": []
+  },
+  {
+    "id": "D007_ROADTRIP",
+    "question": "Cuéntame una escapada por carretera en el Dongfeng 007.",
+    "evidence": [
+      {
+        "id": "D007_COMBINED_RANGE",
+        "fact": "Autonomía combinada superior a 1.100 km.",
+        "source": "https://cidef.cl/modelo/007/"
+      },
+      {
+        "id": "D007_REEV",
+        "fact": "El motor de combustión funciona como extensor de rango de la propulsión eléctrica.",
+        "source": "https://cidef.cl/modelo/007/"
+      },
+      {
+        "id": "D007_COMFORT",
+        "fact": "Techo panorámico con cortina eléctrica y climatizador.",
+        "source": "https://cidef.cl/modelo/007/"
+      }
+    ],
+    "assets": []
+  },
+  {
+    "id": "D007_DRIVE",
+    "question": "Quiero sentir cómo acelera el Dongfeng 007.",
+    "evidence": [
+      {
+        "id": "D007_POWER",
+        "fact": "Potencia eléctrica máxima de 200 kW y 340 Nm de torque.",
+        "source": "https://cidef.cl/modelo/007/"
+      },
+      {
+        "id": "D007_ACCEL",
+        "fact": "Aceleración de 0 a 100 km/h en menos de 7,3 segundos.",
+        "source": "https://cidef.cl/modelo/007/"
+      },
+      {
+        "id": "D007_DRIVE_LAYOUT",
+        "fact": "Tracción trasera.",
+        "source": "https://cidef.cl/modelo/007/"
+      }
+    ],
+    "assets": []
+  }
+]
